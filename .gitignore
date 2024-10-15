@@ -2,3 +2,11 @@
 /certificates/__pycache__
 /record/__pycache__
 /users/__pycache__
+/record/migrations
+db.sqlite3
+*.sqlite3
+db.sqlite3
+db.sqlite3
+
+/users/migrations
+*.sqlite3

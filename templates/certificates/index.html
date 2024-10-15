@@ -1,39 +1,247 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Certificados</title>
+    <style>
+        * {
+            background-color: #f0f3f4;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-<div id="institution">
-    <h1>CERTIFICADOS</h1>
-    <img id="logo" src="https://yeshuahdb.github.io/favicon.ico">
+        #searchInput {
+            background-color: white;
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            width: 50%;
+            text-align: center;
+            color: black;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #institution {
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        #resultsList {
+            color: black;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        #list {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #list table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+
+        #list th, #list td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #list th {
+            background-color: #f2f2f2;
+        }
+
+        details {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+
+        }
+        <style>
+        body {
+            background-color: #f0f3f4;
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    </style>
+</head>
+<body>
+    
+<nav>
+    <ul>
+        <li><a href="SGA Estudiante">SGA Estudiante</a></li>
+        <li><a href="SGA Docente">SGA Docente</a></li>
+        <li><a href="biblioteca">Biblioteca</a></li>
+        <li><a href="correo">Correo</a></li>
+        <li><a href="Eva">Eva</a></li>
+        <li><a href="matriculate">Matricúlate aquí</a></li>
+        <li><a href="radio">Radio</a></li>
+        <li><a href="tv">TV</a></li>
+        <li><a href="Revistas">Revistas</a></li>
+        <li><a href="Galeria">Galeria/a></li>
+        <li><a href="inicio">Inicio</a></li>
+        <li><a href="ofertas-academicas">Oferta Académica</a></li>
+        <li><a href="instituto">Instituto</a></li>
+        <li><a href="repositorio">Repositorio</a></li>
+    </ul>
+</nav>
+<div>
+    <li><a href="inicio">Inicio</a></li>
+        <li><a href="ofertas-academicas">Oferta Académica</a></li>
+        <li><a href="instituto">Instituto</a></li>
+        <li><a href="repositorio">Repositorio</a></li>
+        
+
+<div>
+    <h3>CERTIFICADOS</h3>
+    <p>Valida curso o capacitación en el siguiente apartado (Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación)</p>
 </div>
 
+<div style="display: flex; justify-content: flex-end; align-items: center; margin: 20px;">
+    <form method="GET" action="" id="searchForm" style="display: flex;">
+        <input type="text" name="q" id="searchInput" placeholder="Search..." autocomplete="off" style="margin-right: 10px;">
+        <span class="fooicon fooicon-search"></span>
+        <button type="submit" class="btn btn-primary">icono</button>
+        
+    </form>    
+</div>
 
-<form method="GET" action="" id="searchForm">
-    <input type="text" name="q" id="searchInput" placeholder="Search..." autocomplete="off">
-</form>
+<table>
+    <thead>
+        <tr>
+            <th>CI</th>
+            <th>APELLIDOS</th>
+            <th>NOMBRES</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0705232754</td>
+            <td>pedro luis</td>
+            <td>nagua lucas</td>
+            '<table><tr><th>National ID</th><tr><th>Name</th></tr>Institution</th><th>Start Date</th><th>End Date</th><th>Hours</th><th>Certificate Code</th></tr>' +
+                '<tr><td>' + certificate.national_id + '</td><td>' + certificate.holder_first_name + ' ' + certificate.holder_last_name + '</td><td>' + certificate.institution + '</td><td>' + certificate.start_date + '</td><td>' + certificate.end_date + '</td><td>' + certificate.hours + '</td><td>' + certificate.certificate_code + '</td></tr>' +
+                '</table></div>' +
+                '</details><br>'
+            
+            
+            
+            
+            
+            
+        </tr>
+        <tr>
+            <td>1125689420</td>
+            <td>lucas tomas</td>
+            <td>lucas tomas</td>
+        </tr>
+        <tr>
+            <td>0705232758 </td>
+            <td>Mayra Juana</td>
+            <td>Robles Torres</td>
+        </tr>
+    </tbody>
+</table>
+
 
 <div id="resultsList"></div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#searchInput').on('keyup', function() {
         var query = $(this).val();
         $.ajax({
             url: '',
-            data: {
-                'q': query
-            },
+            data: { 'q': query },
             dataType: 'json',
             success: function(data) {
                 $('#resultsList').empty();
                 if (data.results.length > 0) {
                     $.each(data.results, function(index, certificate) {
                         $('#resultsList').append(
-                            '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name + ' - ' + certificate.course + '</summary><p>' +
+                            '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name + ' - ' + certificate.course + '</summary>' +
                             '<div id="list">' +   
-                            '<table><tr> <th>National id</th>  <th>Name </th>  <th>Institution</th>    <th>Start Date</th> <th>End Date</th>   <th>Hours</th>   <th>Certificate code</th>  </tr>' +
-                            '<tr><td>' + certificate.national_id + '</td><td>' + certificate.holder_first_name   + ' ' +  certificate.holder_last_name+ '</td><td>' + certificate.institution + '</td><td>' + certificate.start_date +  '</td><td>' + certificate.end_date + '</td><td>' + certificate.hours + '</td><td>' + certificate.certificate_code + '</td></tr>' +
+                            '<table><tr><th>National ID</th><th>Name</th><th>Institution</th><th>Start Date</th><th>End Date</th><th>Hours</th><th>Certificate Code</th></tr>' +
+                            '<tr><td>' + certificate.national_id + '</td><td>' + certificate.holder_first_name + ' ' + certificate.holder_last_name + '</td><td>' + certificate.institution + '</td><td>' + certificate.start_date + '</td><td>' + certificate.end_date + '</td><td>' + certificate.hours + '</td><td>' + certificate.certificate_code + '</td></tr>' +
                             '</table></div>' +
-                            '</p></details><br>'
+                            '</details><br>'
                         );
                     });
                 } else {
@@ -43,51 +251,7 @@ $(document).ready(function() {
         });
     });
 });
-
 </script>
 
-
-<style>
-    *{
-        background-color:  #140c24 ;
-        font-family: 'Arial', sans-serif;
-    }
-    #searchInput{
-    background-color: white;
-    display: block;
-    margin: 0 auto;
-    padding: 10px;
-    width: 50%;
-    text-align: center;
-    color: black;
-    }
-    #institution{
-        color: white;
-        text-align: center;
-        padding-top: 10%;
-    }
-    #resultsList{
-        color: white;
-        text-align: center;
-        text-transform: uppercase;
-    }
-    #logo{
-        height: 10%;
-        padding-bottom: 15px;
-    }
-    #list{
-        display: flex;
-        justify-content: center;
-        text-transform: uppercase;
-    }
-    #list table, th, td{
-        border: 1px solid #ffffff;
-        border-collapse: collapse;
-        color: #ffffff;
-        padding: 2px;
-    }
-    details{
-        width: 100%;
-    }
-
-</style>
+</body>
+</html>
