@@ -24,12 +24,6 @@
             border-radius: 4px;
         }
 
-        #institution {
-            color: #333;
-            text-align: center;
-            padding: 20px 0;
-        }
-
         nav {
             margin-bottom: 20px;
         }
@@ -64,54 +58,6 @@
             margin-top: 20px;
         }
 
-        #list {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #list table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 800px;
-            margin: 20px 0;
-            background-color: #fff;
-        }
-
-        #list th, #list td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        #list th {
-            background-color: #f2f2f2;
-        }
-
-        details {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        h3 {
-            color: #2c3e50;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        p {
-            text-align: center;
-            margin-bottom: 20px;
-
-        }
-        <style>
-        body {
-            background-color: #f0f3f4;
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-        }
-
         table {
             border-collapse: collapse;
             width: 100%;
@@ -138,11 +84,21 @@
         tr:hover {
             background-color: #e0e0e0;
         }
-    </style>
+
+        h3 {
+            color: #2c3e50;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    
+
 <nav>
     <ul>
         <li><a href="SGA Estudiante">SGA Estudiante</a></li>
@@ -154,19 +110,13 @@
         <li><a href="radio">Radio</a></li>
         <li><a href="tv">TV</a></li>
         <li><a href="Revistas">Revistas</a></li>
-        <li><a href="Galeria">Galeria/a></li>
+        <li><a href="Galeria">Galería</a></li>
         <li><a href="inicio">Inicio</a></li>
         <li><a href="ofertas-academicas">Oferta Académica</a></li>
         <li><a href="instituto">Instituto</a></li>
         <li><a href="repositorio">Repositorio</a></li>
     </ul>
 </nav>
-<div>
-    <li><a href="inicio">Inicio</a></li>
-        <li><a href="ofertas-academicas">Oferta Académica</a></li>
-        <li><a href="instituto">Instituto</a></li>
-        <li><a href="repositorio">Repositorio</a></li>
-        
 
 <div>
     <h3>CERTIFICADOS</h3>
@@ -176,9 +126,7 @@
 <div style="display: flex; justify-content: flex-end; align-items: center; margin: 20px;">
     <form method="GET" action="" id="searchForm" style="display: flex;">
         <input type="text" name="q" id="searchInput" placeholder="Search..." autocomplete="off" style="margin-right: 10px;">
-        <span class="fooicon fooicon-search"></span>
-        <button type="submit" class="btn btn-primary">icono</button>
-        
+        <button type="submit" class="btn btn-primary">Buscar</button>
     </form>    
 </div>
 
@@ -192,33 +140,20 @@
     </thead>
     <tbody>
         <tr>
-            <td>0705232754</td>
-            <td>pedro luis</td>
-            <td>nagua lucas</td>
-            '<table><tr><th>National ID</th><tr><th>Name</th></tr>Institution</th><th>Start Date</th><th>End Date</th><th>Hours</th><th>Certificate Code</th></tr>' +
-                '<tr><td>' + certificate.national_id + '</td><td>' + certificate.holder_first_name + ' ' + certificate.holder_last_name + '</td><td>' + certificate.institution + '</td><td>' + certificate.start_date + '</td><td>' + certificate.end_date + '</td><td>' + certificate.hours + '</td><td>' + certificate.certificate_code + '</td></tr>' +
-                '</table></div>' +
-                '</details><br>'
-            
-            
-            
-            
-            
-            
-        </tr>
-        <tr>
-            <td>1125689420</td>
-            <td>lucas tomas</td>
-            <td>lucas tomas</td>
-        </tr>
-        <tr>
-            <td>0705232758 </td>
-            <td>Mayra Juana</td>
-            <td>Robles Torres</td>
+            <td>
+                <details>
+                    <summary >0705232754</summary>
+                    <p><strong>Institución:</strong> Nagua Lucas</p>
+                    <p><strong>Fecha Inicio:</strong> 2024-01-01</p>
+                    <p><strong>Fecha Fin:</strong> 2024-12-31</p>
+                    <p><strong>Horas:</strong> 100</p>
+                    <p><strong>Código Certificado:</strong> ABC123</p>
+                </details>
+            </td>
+            <td>Pedro Nagua</td>
         </tr>
     </tbody>
 </table>
-
 
 <div id="resultsList"></div>
 
