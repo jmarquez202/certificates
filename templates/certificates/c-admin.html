@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de Navegación y Tabla</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <div id="navigationbar">
+            <ul>
+                <li><img id="logo" src="https://yeshuahdb.github.io/favicon.ico" alt="Logo"></li>
+                <li>Nombre del usuario</li>
+                <li>Cursos</li>
+                <li>Plantilla</li>
+                <li>Importar</li>
+                <li>Exportar</li>
+                <li>Formato para importar registros</li>
+            </ul>
+        </div>
+        <div id="content">
+            <table>
+                {{customuser}}
+                {{certificate}}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    * {
+        box-sizing: border-box; /* Para incluir el padding y el borde en el ancho total */
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #container {
+        display: flex; /* Utiliza flexbox para distribuir el contenido */
+        height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
+    }
+
+    #navigationbar {
+        background-color: #140c24;
+        width: 300px; /* Ancho de la barra de navegación */
+        padding: 0;
+    }
+
+    #navigationbar ul {
+        list-style-type: none; /* Elimina los estilos de lista predeterminados */
+        padding: 0; /* Asegura que no haya padding */
+    }
+
+    #navigationbar ul li {
+        padding: 14px 16px;
+        color: white;
+        text-align: left; /* Alinea el texto a la izquierda */
+        cursor: pointer;
+    }
+
+    #navigationbar ul li:hover {
+        background-color: #111; /* Cambia el color de fondo al pasar el ratón */
+    }
+
+    #logo {
+        width: 100%; /* Ajusta el logo al ancho de su contenedor */
+        max-width: 80px; /* Opcional: controla el tamaño del logo */
+        margin: 10px auto; /* Centra el logo */
+        display: block; /* Asegura que el logo se comporte como un bloque */
+    }
+
+    #content {
+        flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+        padding: 20px; /* Espaciado interior */
+    }
+
+    table {
+        width: 100%; /* La tabla ocupará todo el ancho disponible */
+        border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    }
+
+    th, td {
+        border: 1px solid #ddd; /* Bordes de las celdas */
+        padding: 8px; /* Espaciado interior de las celdas */
+        text-align: left; /* Alinea el texto a la izquierda */
+    }
+
+    th {
+        background-color: #f2f2f2; /* Color de fondo para las cabeceras */
+    }
+</style>

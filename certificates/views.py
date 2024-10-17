@@ -2,12 +2,13 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.db.models import Q
 from record.models import Certificate
+from users.models import CustomUser
 
 def search_certificates(request):
     query = request.GET.get('q', '')
     
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        if len(query) > 3:
+        if len(query) > 2:
             results = Certificate.objects.filter(
                 Q(national_id__icontains=query) |
                 Q(holder_first_name__icontains=query) |
@@ -30,3 +31,12 @@ def search_certificates(request):
             return JsonResponse({'results': results_list})
     
     return render(request, 'certificates/index.html', {'query': query})
+
+def panel_view(request):
+    customuser = CustomUser.objects.all()
+    certificate = Certificate.objects.all()
+#    cargos = Cargo.objects.count()
+#    encargados = Encargado.objects.count()
+#    equipos = Equipo.objects.count()
+#    mantenimientos = Mantenimiento.objects.count()
+    return render(request, 'certificates/c-admin.html', {'customuser': customuser, 'certificate': certificate,})
