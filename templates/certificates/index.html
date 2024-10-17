@@ -52,37 +52,42 @@
         }
 
         #resultsList {
-            color: black;
+            color: rgb(231, 14, 14);
             text-align: center;
             text-transform: uppercase;
             margin-top: 20px;
         }
 
         table {
-            border-collapse: collapse;
+            border-collapse: collapse; 
             width: 100%;
             max-width: 800px;
             margin: auto;
-            background-color: #fff;
+            background-color: #d0e6f9;
         }
 
         th, td {
-            border: 1px solid #ccc;
             padding: 10px;
             text-align: left;
+            border: none; 
+            
         }
 
         th {
-            background-color: #f2f2f2;
             color: #333;
         }
 
+        /* Colores alternados para las filas */
+        tr:nth-child(odd) {
+            background-color: #e9efeb; /* Color claro para filas impares */
+        }
+
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Color aún más claro para filas pares */
         }
 
         tr:hover {
-            background-color: #e0e0e0;
+            background-color: #e0e0e0; /* Color al pasar el mouse */
         }
 
         h3 {
@@ -95,6 +100,31 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+        details {
+            padding: 10px; 
+            background-color: #fff; 
+            width: 250%; /* Asegura que ocupa todo el ancho */
+            border: none; /* Sin borde para detalles */
+
+        details summary {
+            cursor: pointer; /* Cambia el cursor para indicar interactividad */
+        }
+
+        details div {
+            margin: 0; /* Sin margen para el contenido dentro de details */
+            padding: 10px; /* Relleno interno */
+        }
+
+        details p {
+            margin: 5px 0; 
+            text-align: left; 
+        }
+
+        #list {
+            width: 100%; /* Asegura que la tabla dentro de details ocupa todo el ancho */
+        }
+
     </style>
 </head>
 <body>
@@ -142,7 +172,7 @@
         <tr>
             <td>
                 <details>
-                    <summary >0705232754</summary>
+                    <summary>0705232754</summary>
                     <p><strong>Institución:</strong> Nagua Lucas</p>
                     <p><strong>Fecha Inicio:</strong> 2024-01-01</p>
                     <p><strong>Fecha Fin:</strong> 2024-12-31</p>
@@ -150,7 +180,36 @@
                     <p><strong>Código Certificado:</strong> ABC123</p>
                 </details>
             </td>
-            <td>Pedro Nagua</td>
+            <td>Nagua Lucas</td>
+            <td>Pedro Luis</td>
+        </tr>
+        <tr>
+            <td>
+                <details>
+                    <summary>1125689420</summary>
+                    <p><strong>Institución:</strong> Sung Lopez</p>
+                    <p><strong>Fecha Inicio:</strong> 2024-01-01</p>
+                    <p><strong>Fecha Fin:</strong> 2024-12-31</p>
+                    <p><strong>Horas:</strong> 100</p>
+                    <p><strong>Código Certificado:</strong> ABC123</p>
+                </details>
+            </td>
+            <td>Sung Lopez</td>
+            <td>Lucas Tomas</td>
+        </tr>
+        <tr>
+            <td>
+                <details>
+                    <summary>0705232742</summary>
+                    <p><strong>Institución:</strong> Robles Torres</p>
+                    <p><strong>Fecha Inicio:</strong> 2024-01-01</p>
+                    <p><strong>Fecha Fin:</strong> 2024-12-31</p>
+                    <p><strong>Horas:</strong> 100</p>
+                    <p><strong>Código Certificado:</strong> ABC123</p>
+                </details>
+            </td>
+            <td>Robles Torres</td>
+            <td>Mayra Juana</td>
         </tr>
     </tbody>
 </table>
