@@ -39,4 +39,4 @@ def panel_view(request):
 #    encargados = Encargado.objects.count()
 #    equipos = Equipo.objects.count()
 #    mantenimientos = Mantenimiento.objects.count()
-    return render(request, 'certificates/c-admin.html', {'customuser': customuser, 'certificate': certificate,})
+    return render(request, 'certificates/login.html', {'customuser': customuser, 'certificate': certificate,})
