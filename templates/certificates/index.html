@@ -30,10 +30,6 @@ $(document).ready(function() {
                         $('#resultsList').append(
                             '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name + ' - ' + certificate.course + '</summary><p>' +
                             '<div id="list">' +   
-                            '<table><tr><th>National id</th>  <th>Name </th>  <th>Institution</th>    <th>Start Date</th> <th>End Date</th>   <th>Hours</th>   <th>Certificate code</th>  </tr>' +
-                            '<tr><td>' + certificate.national_id + '</td><td>' + certificate.holder_first_name   + ' ' +  certificate.holder_last_name + '</td><td>' + certificate.institution + '</td><td>' + certificate.start_date +  '</td><td>' + certificate.end_date + '</td><td>' + certificate.hours + '</td><td>' + certificate.certificate_code + '</td></tr>' +
-                            '</table></div>' +
-'</br>'+
                             '<table>'+
                             '<tr><td>National id</td><td>' + certificate.national_id + '</td></tr>' +
                             '<tr><tr><td>Name</td><td>' + certificate.holder_first_name   + ' ' +  certificate.holder_last_name + '</td></tr>' +
