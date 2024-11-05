@@ -1,17 +1,17 @@
+{% load static %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div id="institution">
-    <h1>CERTIFICATES</h1>
-    <img id="logo" src="https://yeshuahdb.github.io/favicon.ico">
+    <h1>CERTIFICADOS</h1>
+    <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
 </div>
-
 
 <form method="GET" action="" id="searchForm">
     <input type="text" name="q" id="searchInput" placeholder="Search..." autocomplete="off">
 </form>
 
 <div id="resultsList"></div>
-
 
 <script>
 $(document).ready(function() {
@@ -30,14 +30,14 @@ $(document).ready(function() {
                         $('#resultsList').append(
                             '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name + ' - ' + certificate.course + '</summary><p>' +
                             '<div id="list">' +   
-                            '<table>'+
+                            '<table>' +
                             '<tr><td>National id</td><td>' + certificate.national_id + '</td></tr>' +
-                            '<tr><tr><td>Name</td><td>' + certificate.holder_first_name   + ' ' +  certificate.holder_last_name + '</td></tr>' +
-                            '<td>Institution</td><td>' + certificate.institution + '</td></tr>' +
-                            '<td>Start Date</td><td>' + certificate.start_date + '</td></tr>' +
-                            '<td>End Date</td><td>' + certificate.end_date  + '</td></tr>' +
-                            '<td>Hours</td><td>' + certificate.hours + '</td></tr>' +
-                            '<td>Certificate code</td><td>' + certificate.certificate_code + '</td></tr>' +
+                            '<tr><td>Name</td><td>' + certificate.holder_first_name + ' ' + certificate.holder_last_name + '</td></tr>' +
+                            '<tr><td>Institution</td><td>' + certificate.institution + '</td></tr>' +
+                            '<tr><td>Start Date</td><td>' + certificate.start_date + '</td></tr>' +
+                            '<tr><td>End Date</td><td>' + certificate.end_date + '</td></tr>' +
+                            '<tr><td>Hours</td><td>' + certificate.hours + '</td></tr>' +
+                            '<tr><td>Certificate code</td><td>' + certificate.certificate_code + '</td></tr>' +
                             '</table>' +
                             '</p></details><br>'
                         );
@@ -49,51 +49,56 @@ $(document).ready(function() {
         });
     });
 });
-
 </script>
 
-
 <style>
-    *{
-        background-color:  #140c24 ;
+    * {
+        background-color: #8aafe9;
         font-family: 'Arial', sans-serif;
     }
-    #searchInput{
-    background-color: white;
-    display: block;
-    margin: 0 auto;
-    padding: 10px;
-    width: 50%;
-    text-align: center;
-    color: black;
+
+    #searchInput {
+        background-color: white;
+        display: block;
+        margin: 0 auto;
+        padding: 10px;
+        width: 50%;
+        text-align: center;
+        color: black;
     }
-    #institution{
-        color: white;
+
+    #institution {
+        color: #140c24;
         text-align: center;
         padding-top: 10%;
     }
-    #resultsList{
+
+    #resultsList {
         color: white;
         text-align: center;
         text-transform: uppercase;
     }
-    #logo{
+
+    #logo {
         height: 10%;
         padding-bottom: 15px;
     }
-    #list{
+
+    #list {
         display: flex;
         justify-content: center;
         text-transform: uppercase;
     }
-    #list table, th, td{
+
+    #list table, th, td {
         border: 1px solid #ffffff;
         border-collapse: collapse;
         color: #ffffff;
         padding: 2px;
-    }
-    details{
-        width: 100%;
+        
     }
 
+    details {
+        width: 100%;
+    }
 </style>

@@ -1,8 +1,10 @@
+from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from record.models import Certificate
 from users.models import CustomUser
+from django.contrib import messages
 
 def search_certificates(request):
     query = request.GET.get('q', '')
@@ -27,7 +29,6 @@ def search_certificates(request):
                 'certificate_code',
                 'institution'
             ))
-            
             return JsonResponse({'results': results_list})
     
     return render(request, 'certificates/index.html', {'query': query})
@@ -40,3 +41,4 @@ def panel_view(request):
 #    equipos = Equipo.objects.count()
 #    mantenimientos = Mantenimiento.objects.count()
     return render(request, 'certificates/login.html', {'customuser': customuser, 'certificate': certificate,})
+

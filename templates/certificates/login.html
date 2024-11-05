@@ -1,10 +1,11 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             box-sizing: border-box; /* Para incluir el padding y el borde en el ancho total */
@@ -14,7 +15,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; /* Fondo claro para el resto de la página */
+            background-color: #6082b6; /* Fondo claro para el resto de la página */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,14 +68,13 @@
         #logo {
             display: block; /* Asegura que el logo se comporte como un bloque */
             margin: 0 auto 20px; /* Centra el logo y le da margen abajo */
-            width: 80px; /* Controla el tamaño del logo */
+            width: 150px; /* Controla el tamaño del logo */
         }
     </style>
 </head>
 <body>
     <div id="login">
-        <img id="logo" src="https://yeshuahdb.github.io/favicon.ico" alt="Logo">
-        <h2>Iniciar Sesión</h2>
+        <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
         <form>
             <div class="form-group">
                 <label for="username">Nombre de usuario:</label>
