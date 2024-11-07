@@ -28,7 +28,7 @@ $(document).ready(function() {
                 if (data.results.length > 0) {
                     $.each(data.results, function(index, certificate) {
                         $('#resultsList').append(
-                            '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name + ' - ' + certificate.course + '</summary><p>' +
+                            '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name +  '</summary><p>' +
                             '<div id="list">' +   
                             '<table>' +
                             '<tr><td>National id</td><td>' + certificate.national_id + '</td></tr>' +
@@ -58,13 +58,14 @@ $(document).ready(function() {
     }
 
     #searchInput {
-        background-color: white;
+        background-color: #D3D3D3;
         display: block;
         margin: 0 auto;
-        padding: 10px;
-        width: 50%;
-        text-align: center;
+        padding: 5px 15px;
+        text-align: top;
         color: black;
+       
+     
     }
 
     #institution {
@@ -74,7 +75,7 @@ $(document).ready(function() {
     }
 
     #resultsList {
-        color: white;
+        color: 00008c;
         text-align: center;
         text-transform: uppercase;
     }
@@ -91,14 +92,16 @@ $(document).ready(function() {
     }
 
     #list table, th, td {
-        border: 1px solid #ffffff;
         border-collapse: collapse;
-        color: #ffffff;
+        color: 00008c;
         padding: 2px;
         
     }
 
     details {
         width: 100%;
+
+        
+        
     }
 </style>
