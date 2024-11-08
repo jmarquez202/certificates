@@ -6,12 +6,46 @@
     <h1>CERTIFICADOS</h1>
     <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
 </div>
+<p>Valida <strong>curso </strong>o<strong> capacitación</strong> en el siguiente apartado <em>(Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación)</em></p>
 
-<form method="GET" action="" id="searchForm">
-    <input type="text" name="q" id="searchInput" placeholder="Search..." autocomplete="off">
-</form>
+<h1 class="entry-title" itemprop="headline">Certificados</h1>
+
+<div>
+    <form method="GET" action="" id="searchForm">
+        <input type="text" name="q" id="searchInput" placeholder="buscar..." autocomplete="off">
+        <input type="button" id="Elimina" value="Elimina">
+        <input type="button" id="Limpiar" value="Limpiar">        
+    </form>
+</div>
+
 
 <div id="resultsList"></div>
+
+<table>
+    <thead>
+        
+         <tr><th>CI</th>
+             <th>NOMBRE</th>
+             <th>APELLIDO</th>
+         </tr>
+         <tr>
+            <th>CI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+        <tr>
+            <th>CI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+        <tr>
+            <th>CI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+        
+    </thead>
+
 
 <script>
 $(document).ready(function() {
@@ -55,15 +89,22 @@ $(document).ready(function() {
     * {
         background-color: #8aafe9;
         font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
     #searchInput {
         background-color: #D3D3D3;
         display: block;
-        margin: 0 auto;
-        padding: 5px 15px;
-        text-align: top;
+        padding: 5px 10px;
+        text-align: left;
         color: black;
+        position: fixed;
+        top: 270px;
+        right: 0;
+        text-align: center; 
+        cursor: pointer;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil (opcional) */
        
      
     }
@@ -104,4 +145,65 @@ $(document).ready(function() {
         
         
     }
+
+    table {
+            width: 40%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        #Elimina,#Limpiar{
+    background-color: #f81b1b;  /* Color de fondo gris claro */
+    padding: 10px 0px;          /* Espaciado interior del botón */
+    color: black;               /* Color del texto */
+    position: fixed;            /* Posiciona el botón de manera fija en la ventana */
+    top: 200px;                 /* Distancia desde la parte superior de la ventana */
+    right: 0;                   /* Coloca el botón en el borde derecho */
+    border: none;               /* Elimina el borde del botón (opcional, si no quieres bordes) */
+    text-align: center;         /* Centra el texto dentro del botón (más común para botones) */
+    cursor: pointer;           /* Cambia el cursor a puntero cuando se pasa sobre el botón */
+
+}
+
+button:hover {
+    background-color: #A9A9A9;  /* Color de fondo más oscuro cuando el mouse pasa sobre el botón */
+}
+
+#Elimina{
+    background-color: #f81b1b;  /* Color de fondo gris claro */
+    width: 30px;          /* Espaciado interior del botón */
+    color: black;               /* Color del texto */
+    position: fixed;            /* Posiciona el botón de manera fija en la ventana */
+    top: 230px;                 /* Distancia desde la parte superior de la ventana */
+    right: 0;                   /* Coloca el botón en el borde derecho */
+    border: none;               /* Elimina el borde del botón (opcional, si no quieres bordes) */
+    text-align: center;         /* Centra el texto dentro del botón (más común para botones) */
+    cursor: pointer;           /* Cambia el cursor a puntero cuando se pasa sobre el botón */
+
+}
+
+button:hover {
+    background-color: #A9A9A9;  /* Color de fondo más oscuro cuando el mouse pasa sobre el botón */
+}
+
+
+
 </style>
