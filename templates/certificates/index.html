@@ -1,14 +1,100 @@
 {% load static %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificados</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * {
+            background-color: #f0f8ff; /* Cambia a un fondo más claro */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .entry-title {
+        text-align: left; /* Alinear el texto a la izquierda */
+        }
+        #institution {
+            color: #2c3e50; /* Cambia el color del texto */
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        /* Estilo para el contenedor del formulario */
+        #searchForm {
+            display: flex; /* Usar flexbox para alinear elementos en una línea */
+            justify-content: flex-end; /* Alinear a la derecha */
+            margin: 20px; /* Espacio alrededor del formulario */
+        }
+
+        #searchInput {
+            background-color: #e8f0fe; /* Cambia el color del campo de búsqueda */
+            padding: 10px;
+            border: 1px solid #ccc; /* Añade un borde */
+            border-radius: 5px; /* Bordes redondeados */
+            width: 200px; /* Ancho del campo de búsqueda */
+            margin-right: 10px; /* Espacio entre el campo de búsqueda y los botones */
+        }
+
+        #resultsList {
+            margin: 20px auto;
+            width: 80%; /* Ajusta el ancho de los resultados */
+            color: #2980b9; /* Cambia el color del texto de resultados */
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%; /* Ancho completo para la tabla */
+            border-collapse: collapse; /* Colapsar bordes */
+            margin-top: 10px; /* Espacio entre el resumen y la tabla */
+        }
+
+        th, td {
+            padding: 8px; /* Espaciado interior en celdas */
+            text-align: left; /* Alinear texto a la izquierda */
+            border-bottom: 1px solid #ddd; /* Borde inferior para las filas */
+        }
+
+        th {
+            background-color: #3498db; /* Color de fondo del encabezado */
+            color: white; /* Color del texto del encabezado */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Color de fondo al pasar el mouse sobre la fila */
+        }
+
+        #Elimina, #Limpiar {
+            background-color: #e74c3c; /* Cambia el color de fondo de los botones */
+            color: white; /* Cambia el color del texto */
+            padding: 10px 20px; /* Aumenta el espaciado interior */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cambia el cursor a puntero cuando se pasa sobre el botón */
+        }
+
+        #Elimina:hover, #Limpiar:hover {
+            background-color: #c0392b; /* Color más oscuro al pasar el mouse */
+        }
+
+        details {
+            margin-bottom: 15px; /* Espacio entre los detalles */
+        }
+    </style>
+</head>
+<body>
 
 <div id="institution">
-    <h1>CERTIFICADOS</h1>
-    <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
-</div>
-<p>Valida <strong>curso </strong>o<strong> capacitación</strong> en el siguiente apartado <em>(Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación)</em></p>
 
-<h1 class="entry-title" itemprop="headline">Certificados</h1>
+    <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
+
+    <h1 class="entry-title" itemprop="headline" style="text-align: left;">Certificados</h1>
+
+    <p>Valida <strong>curso </strong>o<strong> capacitación</strong> en el siguiente apartado <em>(Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación)</em></p>
+</div>
 
 <div>
     <form method="GET" action="" id="searchForm">
@@ -18,192 +104,45 @@
     </form>
 </div>
 
-
 <div id="resultsList"></div>
 
-<table>
-    <thead>
-        
-         <tr><th>CI</th>
-             <th>NOMBRE</th>
-             <th>APELLIDO</th>
-         </tr>
-         <tr>
-            <th>CI</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-        </tr>
-        <tr>
-            <th>CI</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-        </tr>
-        <tr>
-            <th>CI</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-        </tr>
-        
-    </thead>
-
-
 <script>
-$(document).ready(function() {
-    $('#searchInput').on('keyup', function() {
-        var query = $(this).val();
-        $.ajax({
-            url: '',
-            data: {
-                'q': query
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#resultsList').empty();
-                if (data.results.length > 0) {
-                    $.each(data.results, function(index, certificate) {
-                        $('#resultsList').append(
-                            '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name +  '</summary><p>' +
-                            '<div id="list">' +   
-                            '<table>' +
-                            '<tr><td>National id</td><td>' + certificate.national_id + '</td></tr>' +
-                            '<tr><td>Name</td><td>' + certificate.holder_first_name + ' ' + certificate.holder_last_name + '</td></tr>' +
-                            '<tr><td>Institution</td><td>' + certificate.institution + '</td></tr>' +
-                            '<tr><td>Start Date</td><td>' + certificate.start_date + '</td></tr>' +
-                            '<tr><td>End Date</td><td>' + certificate.end_date + '</td></tr>' +
-                            '<tr><td>Hours</td><td>' + certificate.hours + '</td></tr>' +
-                            '<tr><td>Certificate code</td><td>' + certificate.certificate_code + '</td></tr>' +
-                            '</table>' +
-                            '</p></details><br>'
-                        );
-                    });
-                } else {
-                    $('#resultsList').append('<p>No results found</p>');
+    $(document).ready(function() {
+        $('#searchInput').on('keyup', function() {
+            var query = $(this).val();
+            $.ajax({
+                url: '',
+                data: {
+                    'q': query
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#resultsList').empty();
+                    if (data.results.length > 0) {
+                        $.each(data.results, function(index, certificate) {
+                            $('#resultsList').append(
+                                '<details><summary>' + certificate.national_id + ' - ' + certificate.holder_first_name + ' - ' + certificate.holder_last_name +  '</summary><p>' +
+                                '<div id="list">' +   
+                                '<table>' +
+                                '<tr><td>National id</td><td>' + certificate.national_id + '</td></tr>' +
+                                '<tr><td>Name</td><td>' + certificate.holder_first_name + ' ' + certificate.holder_last_name + '</td></tr>' +
+                                '<tr><td>Institution</td><td>' + certificate.institution + '</td></tr>' +
+                                '<tr><td>Start Date</td><td>' + certificate.start_date + '</td></tr>' +
+                                '<tr><td>End Date</td><td>' + certificate.end_date + '</td></tr>' +
+                                '<tr><td>Hours</td><td>' + certificate.hours + '</td></tr>' +
+                                '<tr><td>Certificate code</td><td>' + certificate.certificate_code + '</td></tr>' +
+                                '</table>' +
+                                '</p></details><br>'
+                            );
+                        });
+                    } else {
+                        $('#resultsList').append('<p>No results found</p>');
+                    }
                 }
-            }
+            });
         });
     });
-});
-</script>
+    </script>
 
-<style>
-    * {
-        background-color: #8aafe9;
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    #searchInput {
-        background-color: #D3D3D3;
-        display: block;
-        padding: 5px 10px;
-        text-align: left;
-        color: black;
-        position: fixed;
-        top: 270px;
-        right: 0;
-        text-align: center; 
-        cursor: pointer;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil (opcional) */
-       
-     
-    }
-
-    #institution {
-        color: #140c24;
-        text-align: center;
-        padding-top: 10%;
-    }
-
-    #resultsList {
-        color: 00008c;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    #logo {
-        height: 10%;
-        padding-bottom: 15px;
-    }
-
-    #list {
-        display: flex;
-        justify-content: center;
-        text-transform: uppercase;
-    }
-
-    #list table, th, td {
-        border-collapse: collapse;
-        color: 00008c;
-        padding: 2px;
-        
-    }
-
-    details {
-        width: 100%;
-
-        
-        
-    }
-
-    table {
-            width: 40%;
-            margin: 40px auto;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        #Elimina,#Limpiar{
-    background-color: #f81b1b;  /* Color de fondo gris claro */
-    padding: 10px 0px;          /* Espaciado interior del botón */
-    color: black;               /* Color del texto */
-    position: fixed;            /* Posiciona el botón de manera fija en la ventana */
-    top: 200px;                 /* Distancia desde la parte superior de la ventana */
-    right: 0;                   /* Coloca el botón en el borde derecho */
-    border: none;               /* Elimina el borde del botón (opcional, si no quieres bordes) */
-    text-align: center;         /* Centra el texto dentro del botón (más común para botones) */
-    cursor: pointer;           /* Cambia el cursor a puntero cuando se pasa sobre el botón */
-
-}
-
-button:hover {
-    background-color: #A9A9A9;  /* Color de fondo más oscuro cuando el mouse pasa sobre el botón */
-}
-
-#Elimina{
-    background-color: #f81b1b;  /* Color de fondo gris claro */
-    width: 30px;          /* Espaciado interior del botón */
-    color: black;               /* Color del texto */
-    position: fixed;            /* Posiciona el botón de manera fija en la ventana */
-    top: 230px;                 /* Distancia desde la parte superior de la ventana */
-    right: 0;                   /* Coloca el botón en el borde derecho */
-    border: none;               /* Elimina el borde del botón (opcional, si no quieres bordes) */
-    text-align: center;         /* Centra el texto dentro del botón (más común para botones) */
-    cursor: pointer;           /* Cambia el cursor a puntero cuando se pasa sobre el botón */
-
-}
-
-button:hover {
-    background-color: #A9A9A9;  /* Color de fondo más oscuro cuando el mouse pasa sobre el botón */
-}
-
-
-
-</style>
+</body>
+</html>
