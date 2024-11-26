@@ -7,38 +7,27 @@ from users.models import CustomUser
 from django.contrib import messages
 
 def search_certificates(request):
-    query = request.GET.get('q', '')
-    
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        if len(query) > 2:
-            results = Certificate.objects.filter(
-                Q(national_id__icontains=query) |
-                Q(holder_first_name__icontains=query) |
-                Q(holder_last_name__icontains=query) |
-                Q(certificate_code__icontains=query)
-            )
-            
-            results_list = list(results.values(
-                'national_id',
-                'holder_first_name',
-                'holder_last_name',
-                'course',
-                'hours',
-                'start_date',
-                'end_date',
-                'certificate_code',
-                'institution'
-            ))
-            return JsonResponse({'results': results_list})
-    
-    return render(request, 'certificates/index.html', {'query': query})
+    # Obtener todos los certificados sin filtrarlos
+    certificates = Certificate.objects.all()
 
-def panel_view(request):
-    customuser = CustomUser.objects.all()
-    certificate = Certificate.objects.all()
-#    cargos = Cargo.objects.count()
-#    encargados = Encargado.objects.count()
-#    equipos = Equipo.objects.count()
-#    mantenimientos = Mantenimiento.objects.count()
-    return render(request, 'certificates/login.html', {'customuser': customuser, 'certificate': certificate,})
+    # Pasar todos los certificados a la plantilla
+    return render(request, 'certificates/index.html', {'certificates': certificates})
 
+def login_view(request):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Autenticar al usuario
+        user = authenticate(request, username=username, password=password) # type: ignore
+        
+        if user is not None:
+            # Iniciar sesión al usuario
+            login(request, user)
+            return redirect('home')  # Redirigir a la página de inicio u otra página protegida
+        else:
+            # Mostrar un mensaje de error si las credenciales son incorrectas
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+    
+    return render(request, 'login.html')
