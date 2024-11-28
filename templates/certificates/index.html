@@ -14,7 +14,58 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css" />
 
+    <header>
+        <div class="barra-superior"></div>
+        <div class="barra-inferior"></div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Contenido de tu menú de navegación -->
+            <a class="navbar-brand" href="#">Inicio</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Oferta Académica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Instituto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Repositorio</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <style>
+        header {
+            position: relative;
+        }
+        
+        .barra-superior {
+            height: 50px; /* Altura de la barra superior */
+            background-color: #007bff; /* Color azul */
+        }
+        
+        .barra-inferior {
+            height: 50px; /* Altura de la barra inferior */
+            background-color: #0056b3; /* Color azul oscuro */
+        }
+        
+      
+        
+        #searchInput {
+            background-color: red;  /* Color de fondo del campo de búsqueda */
+            padding: 10px;
+            border: 1px solid #ccc;  /* Borde del campo de búsqueda */
+            border-radius: 5px;  /* Bordes redondeados */
+            width: 100px;  /* Ajusta el tamaño del campo de búsqueda */
+            margin-right: 10px;  /* Espacio entre el campo de búsqueda y el primer botón */
+        }
+        
+        
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
@@ -24,6 +75,22 @@
             text-align: center;
             margin-bottom: 30px;
         }
+
+        #institution h1.display-4 {
+            color: #67768e; /* Azul oscuro */
+            font-size: 3rem;
+            font-weight: bold; /* Negrita */
+            margin-bottom: 0.5rem;
+        }
+
+
+        #institution p {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #67768e; /* Azul más claro */
+            margin-bottom: 1rem;
+        }
+
 
         #institution img {
             max-width: 200px;
@@ -42,6 +109,33 @@
         table.dataTable tbody tr.shown {
             background-color: #f9f9f9;
         }
+
+        /* Ocultar el cuadro de búsqueda interno de DataTables */
+        .dataTables_filter {
+            display: none;
+        }
+
+        /* Alineación de los botones y barra de búsqueda */
+        #searchForm {
+            flex-grow: 1;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-end {
+            justify-content: flex-end;
+        }
+
+        #searchInput {
+            width: 200px; /* Puedes ajustar el tamaño de la barra de búsqueda */
+            margin-right: 10px; /* Espacio entre la barra de búsqueda y los botones */
+        }
+
+        .d-flex button {
+            margin-left: 10px; /* Espacio entre los botones */
+        }
     </style>
 </head>
 <body>
@@ -52,14 +146,19 @@
         <p>Busca por nombres, apellidos, número de cédula, nombre del curso o código de verificación.</p>
     </div>
 
-    <div>
-        <form method="GET" action="" id="searchForm">
-            <input type="text" name="q" id="searchInput" placeholder="buscar..." autocomplete="off">
-            <input type="button" id="Elimina" value="Elimina">
-            <input type="button" id="Limpiar" value="Limpiar">        
+    <div class="d-flex align-items-center mb-3">
+        <!-- Campo de búsqueda y botón de buscar dentro de un contenedor flex -->
+        <form method="GET" action="" id="searchForm" class="d-flex w-100">
+            <input type="text" name="q" id="searchInput" class="form-control form-control-sm" placeholder="Buscar..." autocomplete="off">
+            
+            <!-- Solo el botón de buscar -->
+            <button type="submit" id="limpiar" class="btn btn-primary btn-sm ml-2">limpiar</button>
+            <button type="submit" id="limpiar" class="btn btn-primary btn-sm ml-2">eliminar</button>
+
         </form>
     </div>
 
+    <!-- Tabla con los resultados -->
     <table id="myTable" class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -119,6 +218,12 @@
                 </table>`;
         }
 
+        // Función para manejar la búsqueda externa
+        $('#searchInput').on('input', function() {
+            var searchValue = $(this).val();
+            table.search(searchValue).draw(); // Realiza la búsqueda en la tabla
+        });
+
         // Hacer que al hacer clic en cualquier parte de la fila se expanda
         $('#myTable tbody').on('click', 'tr', function () {
             var tr = $(this);
@@ -133,24 +238,6 @@
                 row.child(format(row.data())).show();
                 tr.addClass('shown');
             }
-        });
-
-        // Función para manejar la búsqueda
-        $('#searchInput').on('input', function() {
-            var searchValue = $(this).val();
-            table.search(searchValue).draw(); // Realiza la búsqueda en la tabla
-        });
-
-        // Función para limpiar el campo de búsqueda (botón "Limpiar")
-        $('#Limpiar').click(function() {
-            $('#searchInput').val(''); // Limpiar el campo de búsqueda
-            table.search('').draw(); // Mostrar todos los registros
-        });
-
-        // Función para eliminar la búsqueda y restaurar todos los registros (botón "Elimina")
-        $('#Elimina').click(function() {
-            $('#searchInput').val(''); // Eliminar el contenido del campo de búsqueda
-            table.search('').draw(); // Eliminar la búsqueda y restaurar todos los registros
         });
     });
 </script>
