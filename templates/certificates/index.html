@@ -18,7 +18,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
-
         /* Estilo para la barra superior */
         .barra-superior {
             background-color: #050096; /* Azul oscuro */
@@ -58,7 +57,7 @@
         }
 
         .barra-inferior .menu a {
-            color: white;
+            color: #d8e1f0;
             text-decoration: none;
             font-weight: bold;
         }
@@ -67,10 +66,23 @@
             text-decoration: underline;
         }
 
+        table th {
+            background-color: #8dd407; /* Color de fondo oscuro */
+            color: white; /* Color del texto en blanco */
+            font-weight: bold; /* Negrita */
+            text-align: center; /* Centrar el texto */
+        }
+
+        /* Cambiar color al pasar el mouse sobre los encabezados */
+        table th:hover {
+            background-color: #a6fa7f !important; /* Azul cuando el mouse pasa sobre el encabezado */
+            color: white !important; /* Mantener el color blanco del texto */
+        }
+
         /* Estilo de la página */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
+            background-color: #dfe5ed;
         }
 
         #institution {
@@ -78,15 +90,21 @@
             margin-bottom: 30px;
         }
 
-        
+        #institution h1 {
+            color: #67768e;
+        }
+
+        #institution p {
+            color: #67768e;
+        }
 
         #institution img {
             max-width: 200px;
             margin-bottom: 15px;
         }
 
-        table.dataTable tbody tr.shown td.dt-control::before {
-            content: "-";
+        .btn-danger i {
+            font-size: 16px; /* Tamaño del ícono */
         }
 
         /* Ocultar el cuadro de búsqueda interno de DataTables */
@@ -99,24 +117,29 @@
             cursor: pointer;
         }
 
-        table.dataTable tbody tr.shown {
-            background-color: #f9f9f9;
+        table.dataTable tbody tr.shown td.dt-control::before {
+            content: "-";
         }
-
-        #searchInput {
-            width: 200px; /* Tamaño de la barra de búsqueda */
-            margin-right: 10px;
-        }
-
-        .d-flex button {
-            margin-left: 10px;
-        }
-        
 
         /* Estilo para que toda la fila sea clicable */
         #myTable tbody tr {
             cursor: pointer;
         }
+
+        #searchInput {
+            width: 150px; /* Tamaño de la barra de búsqueda */
+            margin-right: 10px;
+        }
+
+        /* Estilo para la fila seleccionada */
+        .selected {
+            background-color: #cce5ff; /* Color de fondo azul claro */
+        }
+
+        .selected td {
+            color: #0056b3; /* Color de texto azul para la fila seleccionada */
+        }
+
     </style>
 </head>
 <body>
@@ -154,16 +177,28 @@
     <!-- Contenido principal -->
     <div class="container mt-5">
         <div id="institution">
-            <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
+            <img src="{% static 'logo_2024.png' %}" alt="logo_2024">
             <h1 class="display-4">Certificados</h1>
             <p>Valida <strong>curso o capacitación</strong> en el siguiente apartado (Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación).</p>        
         </div>
 
         <!-- Barra de búsqueda y botones -->
         <div class="d-flex justify-content-end align-items-center mb-3">
-            <input type="text" id="searchInput" class="form-control" placeholder="Buscar...">
-            <button type="button" id="Elimina" class="btn btn-danger btn-sm ml-2">Eliminar</button>
-            <button type="button" id="Limpiar" class="btn btn-warning btn-sm ml-2">Limpiar</button>
+            <div class="input-group" style="max-width: 400px; width: 25%;"> <!-- Agrupamos el input y el botón -->
+                <input type="text" id="searchInput" class="form-control" placeholder="Buscar..." style="border-radius: 30px; padding-left: 40px;"/>
+                <div class="input-group-append">
+                    <!-- Botón desplegable de búsqueda con solo el ícono de triángulo -->
+                    <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="searchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 30px; padding: 10px 20px; background-color: #2d8d00; color: white; border: none;">
+                        <i class="fas fa-caret-down" style="font-size: 16px;"></i> <!-- Triángulo -->
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="searchButton">
+                        <a class="dropdown-item" href="#" id="searchByCedula"> Cédula</a>
+                        <a class="dropdown-item" href="#" id="searchByName"> Nombre</a>
+                        <a class="dropdown-item" href="#" id="searchByName"> Apellidos</a>
+                        <a class="dropdown-item" href="#" id="searchByName"> Curso</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Tabla con los resultados -->
@@ -200,7 +235,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Aquí se insertarán los detalles dinámicamente -->
                     <p id="modalDetails">Cargando detalles...</p>
                 </div>
             </div>
@@ -215,7 +249,6 @@
 
     <script>
         $(document).ready(function () {
-            // Inicializar DataTable
             var table = $('#myTable').DataTable({
                 language: {
                     search: "Buscar:",
@@ -223,13 +256,20 @@
                     info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
                     infoEmpty: "No se encontraron registros",
                     infoFiltered: "(filtrado de _MAX_ registros totales)"
-                }
+                },
+                columnDefs: [
+                    { targets: [0, 3], visible: false } // Oculta las columnas CI (0) y Curso (3)
+                ]
+            });
+
+            // Evento de búsqueda personalizado
+            $('#searchInput').on('keyup', function () {
+                table.search(this.value).draw(); // Filtra la tabla en tiempo real
             });
 
             // Evento click en la fila
             $('#myTable tbody').on('click', 'tr', function () {
                 var rowData = table.row(this).data(); // Obtiene los datos de la fila clickeada
-                var id = $(this).data('id'); // Obtiene el ID de la fila
                 var details = `
                     <p><strong>CI:</strong> ${rowData[0]}</p>
                     <p><strong>Apellidos:</strong> ${rowData[1]}</p>
@@ -241,8 +281,12 @@
                     <p><strong>Cod Interno:</strong> AULA-AF-1501-2022</p>
                     <p><strong>Aval:</strong> AULA MASTER</p>
                 `;
-                $('#modalDetails').html(details); // Inserta los detalles en el modal
-                $('#detailsModal').modal('show'); // Muestra el modal
+                $('#modalDetails').html(details);
+                $('#detailsModal').modal('show');
+                
+                // Agregar la clase 'selected' para resaltar la fila
+                $('#myTable tbody tr').removeClass('selected');
+                $(this).addClass('selected');
             });
         });
     </script>

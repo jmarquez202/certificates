@@ -7,31 +7,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificados</title>
 
-    <!-- Cargar Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Cargar los iconos de Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css" />
 
-    <!-- Cargar DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
-    
-    <!-- Cargar el tema de DataTables con Bootstrap 4 -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* Estilo general */
+        /* Estilo para la barra superior */
+        .barra-superior {
+            background-color: #050096; /* Azul oscuro */
+            color: white;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .barra-superior a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .barra-superior a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para la barra inferior */
+        .barra-inferior {
+            background-color: #678ccf; /* Azul intermedio */
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .barra-inferior img {
+            max-height: 30px; /* Tamaño máximo del logotipo */
+        }
+
+        .barra-inferior .menu {
+            margin-left: auto; /* Alinea el menú a la derecha */
+            display: flex;
+            gap: 20px; /* Espaciado entre las opciones del menú */
+        }
+
+        .barra-inferior .menu a {
+            color: #d8e1f0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .barra-inferior .menu a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo de la página */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #dfe5ed;
         }
 
         #institution {
             text-align: center;
-            padding: 5% 0;
-            background-color: #ffffff;
             margin-bottom: 30px;
+        }
+
+        #institution h1 {
+            color: #67768e;
+        }
+
+        #institution p {
+            color: #67768e;
         }
 
         #institution img {
@@ -39,169 +90,171 @@
             margin-bottom: 15px;
         }
 
-        .entry-title {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+        .btn-danger i {
+            font-size: 16px; /* Tamaño del ícono */
         }
 
-        /* Estilos para la tabla */
-        .dataTables_wrapper {
-            margin-top: 30px;
-        }
-
-        table.dataTable thead th {
-            background-color: #3498db;
-            color: white;
-        }
-
-        table.dataTable tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Ajustes responsivos */
-        @media (max-width: 768px) {
-            .dataTables_wrapper .dataTables_filter {
-                float: none;
-                text-align: center;
-            }
-
-            .dataTables_wrapper .dataTables_length {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-        }
-
-        /* Estilo para el buscador personalizado */
-        .search-container {
-            margin-bottom: 20px;
-        }
-
-        .search-container input {
-            background-color: #e8f0fe;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 250px;
-        }
-
-        /* Estilo para los botones */
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .details-row {
+        /* Ocultar el cuadro de búsqueda interno de DataTables */
+        .dataTables_filter {
             display: none;
-            background-color: #f9f9f9;
         }
 
-        .shown {
-            background-color: #d9edf7;
+        table.dataTable tbody tr td.dt-control::before {
+            content: "+";
+            cursor: pointer;
+        }
+
+        table.dataTable tbody tr.shown td.dt-control::before {
+            content: "-";
+        }
+
+        #searchInput {
+            width: 150px; /* Tamaño de la barra de búsqueda */
+            margin-right: 10px;
+        }
+
+        /* Estilo para que toda la fila sea clicable */
+        #myTable tbody tr {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-
-<div class="container mt-5">
-    <div id="institution" class="text-center mb-5">
-        <h1 class="display-4">Certificados</h1>
-        <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024" class="mb-3" style="max-width: 200px;">
-        <p class="lead">Valida <strong>curso</strong> o <strong>capacitación</strong> en el siguiente apartado 
-            <em>(Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación)</em>
-        </p>
-    </div>
-
-    <div class="d-flex justify-content-between mb-3">
-        <form method="GET" action="" id="searchForm" class="search-container">
-            <input type="text" name="q" id="searchInput" placeholder="buscar..." autocomplete="off">
-        </form>
-
-        <div class="button-container">
-            <input type="button" id="Elimina" value="Eliminar" class="btn btn-danger">
-            <input type="button" id="Limpiar" value="Limpiar" class="btn btn-secondary">
+    <!-- Barra superior -->
+    <div class="barra-superior">
+        <div>
+            <i class="fas fa-map-marker-alt"></i> SGA Estudiantes
+        </div>
+        <div>
+            <a href="#"><i class="fas fa-broadcast-tower"></i> Radio</a>
+            <a href="#"><i class="fas fa-tv"></i> TV</a>
+            <a href="#"><i class="fas fa-book"></i> Revista</a>
+            <a href="#"><i class="fas fa-images"></i> Galería</a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
-    
-    <!-- Tabla de resultados con Bootstrap -->
-    <table id="myTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
-        <thead class="thead-dark">
-            <tr>
-                <th>CI</th>
-                <th>Apellidos</th>
-                <th>Nombres</th>
-                <th>Curso</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for certificate in certificates %}
-            <tr data-id="{{ certificate.national_id }}">
-                <td>{{ certificate.national_id }}</td>
-                <td>{{ certificate.holder_last_name }}</td>
-                <td class="details-toggle">{{ certificate.holder_first_name }}</td>
-                <td>{{ certificate.course }}</td>
-            </tr>
-            <!-- Submenú oculto -->
-            <tr class="details-row" data-id="{{ certificate.national_id }}">
-                <td colspan="4">
-                    <ul>
-                        <li><strong>Horas Académicas:</strong> {{ certificate.hours }}</li>
-                        <li><strong>Fecha Inicio:</strong> {{ certificate.start_date }}</li>
-                        <li><strong>Fecha Fin:</strong> {{ certificate.end_date }}</li>
-                        <li><strong>Código Interno:</strong> {{ certificate.internal_code }}</li>
-                    </ul>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
 
-<!-- Cargar los scripts necesarios -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Barra inferior -->
+    <div class="barra-inferior">
+        <div>
+            <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
+        </div>
+        <div class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Oferta Académica</a>
+            <a href="#">Instituto</a>
+            <a href="#">Repositorio</a>
+        </div>
+        <div>
+            <a href="#"><i class="fas fa-search"></i></a>
+        </div>
+    </div>
 
-<script>
-    $(document).ready(function() {
-        // Inicializar DataTable
-        var table = $('#myTable').DataTable({
-            "processing": true,
-            "serverSide": false,  // Usamos client-side, ya que todos los datos están en la página
-            "searching": true,    // Habilitar la búsqueda
-            "paging": true,       // Habilitar la paginación
-            "order": [[ 0, 'asc' ]],  // Ordenar por CI de forma ascendente
-            "language": {
-                "search": "Buscar:",
-                "lengthMenu": "Mostrar _MENU_ registros ",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "infoEmpty": "No se encontraron registros",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)"
-            }
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <div id="institution">
+            <img src="{% static 'logo_2024.png' %}" alt="logo_2024">
+            <h1 class="display-4">Certificados</h1>
+            <p>Valida <strong>curso o capacitación</strong> en el siguiente apartado (Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación).</p>        
+        </div>
+
+        <!-- Barra de búsqueda y botones -->
+        <div class="d-flex justify-content-end align-items-center mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar...">
+            <button type="button" id="Elimina" class="btn btn-danger btn-sm ml-2">
+                <i class="fas fa-search"></i>
+            </button>
+            <button type="button" id="Elimina" class="btn btn-danger btn-sm ml-2">
+                <i class="fas fa-search"></i>
+            </button>      
+        </div>
+
+        <!-- Tabla con los resultados -->
+        <table id="myTable" class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>CI</th>
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Curso</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for certificate in certificates %}
+                <tr data-id="{{ certificate.id }}">
+                    <td>{{ certificate.national_id }}</td>
+                    <td>{{ certificate.holder_last_name }}</td>
+                    <td>{{ certificate.holder_first_name }}</td>
+                    <td>{{ certificate.course }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de detalles -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detalles del Certificado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDetails">Cargando detalles...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Inicializar DataTable
+            var table = $('#myTable').DataTable({
+                language: {
+                    search: "Buscar:",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    infoEmpty: "No se encontraron registros",
+                    infoFiltered: "(filtrado de _MAX_ registros totales)"
+                },
+                columnDefs: [
+                    { targets: [0, 3], visible: false } // Oculta las columnas CI (0) y Curso (3)
+                ]
+            });
+
+            // Evento de búsqueda personalizado
+            $('#searchInput').on('keyup', function () {
+                table.search(this.value).draw(); // Filtra la tabla en tiempo real
+            });
+
+            // Evento click en la fila
+            $('#myTable tbody').on('click', 'tr', function () {
+                var rowData = table.row(this).data(); // Obtiene los datos de la fila clickeada
+                var details = `
+                    <p><strong>CI:</strong> ${rowData[0]}</p>
+                    <p><strong>Apellidos:</strong> ${rowData[1]}</p>
+                    <p><strong>Nombres:</strong> ${rowData[2]}</p>
+                    <p><strong>Curso:</strong> ${rowData[3]}</p>
+                    <p><strong>Horas Académicas:</strong> 20</p>
+                    <p><strong>Fecha Inicio:</strong> 05/11/2022</p>
+                    <p><strong>Fecha Fin:</strong> 05/13/2022</p>
+                    <p><strong>Cod Interno:</strong> AULA-AF-1501-2022</p>
+                    <p><strong>Aval:</strong> AULA MASTER</p>
+                `;
+                $('#modalDetails').html(details);
+                $('#detailsModal').modal('show');
+            });
         });
-
-        // Sincronizar el campo de búsqueda con el buscador de DataTables
-        $('#searchInput').on('keyup', function() {
-            table.search(this.value).draw(); // Filtra los resultados al escribir
-        });
-
-        // Acción al hacer clic sobre una fila para mostrar los detalles
-        $('#myTable tbody').on('click', 'td.details-toggle', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row(tr);
-
-            // Si los detalles están visibles, los ocultamos
-            if (tr.next('.details-row').is(':visible')) {
-                tr.next('.details-row').slideUp();
-                tr.removeClass('shown');
-            } else {
-                // Si los detalles están ocultos, los mostramos
-                tr.next('.details-row').slideDown();
-                tr.addClass('shown');
-            }
-        });
-    });
-</script>
-
+    </script>
 </body>
 </html>
