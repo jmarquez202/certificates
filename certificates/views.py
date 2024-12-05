@@ -31,3 +31,6 @@ def login_view(request):
             messages.error(request, 'Usuario o contraseña incorrectos.')
     
     return render(request, 'login.html')
+
+def panel_view(request):
+    return render(request, 'panel.html')  # Usa el nombre de tu plantilla HTML

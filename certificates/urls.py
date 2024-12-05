@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 #path('search_certificates', views.search_certificates, name='panel'),
     path('', views.search_certificates, name='search_certificates'),
- #   path('search_certificates', views.panel_view, name='panel'),   
+ 
 
 
 ]
+

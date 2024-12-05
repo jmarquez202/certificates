@@ -67,22 +67,20 @@
         }
 
         table th {
-            background-color: #8dd407; /* Color de fondo oscuro */
             color: white; /* Color del texto en blanco */
             font-weight: bold; /* Negrita */
             text-align: center; /* Centrar el texto */
-        }
-
-        /* Cambiar color al pasar el mouse sobre los encabezados */
-        table th:hover {
-            background-color: #a6fa7f !important; /* Azul cuando el mouse pasa sobre el encabezado */
-            color: white !important; /* Mantener el color blanco del texto */
         }
 
         /* Estilo de la página */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #dfe5ed;
+        }
+
+        /* Cambiar el color de la columna cuando pasas el mouse */
+        #myTable tbody td:hover {
+            background-color: #cce5ff; /* Fondo azul claro */
         }
 
         #institution {
@@ -97,6 +95,8 @@
         #institution p {
             color: #67768e;
         }
+
+        
 
         #institution img {
             max-width: 200px;
@@ -126,19 +126,57 @@
             cursor: pointer;
         }
 
+        /* Estilo para los botones */
+        .central-button,
+        #searchButton,
+        .btn-danger {
+            border-radius: 15%; /* Bordes ligeramente redondeados */
+        }
+
+        .central-button {
+            background-color: #fa1313; /* Color de fondo del botón limpiar */                
+            color: #333; /* Color del texto */
+            border: 1px solid #ccc; /* Borde */
+            padding: 8px 5px; /* Espaciado interno del botón */
+         }
+
         #searchInput {
             width: 150px; /* Tamaño de la barra de búsqueda */
-            margin-right: 10px;
+            margin-right: 0px;
         }
 
-        /* Estilo para la fila seleccionada */
-        .selected {
-            background-color: #cce5ff; /* Color de fondo azul claro */
+                /* Estilo para los botones de despliegue */
+        #searchButton {
+            border-radius: 30px; /* Bordes redondeados para el botón de despliegue */
+            padding: 10px 20px; /* Espaciado */
+            background-color: #8d6700; /* Fondo verde */
+            color: white; /* Texto blanco */
+            border: none; /* Sin borde */
         }
 
-        .selected td {
-            color: #0056b3; /* Color de texto azul para la fila seleccionada */
+        #searchButton:hover {
+            background-color: #248200; /* Cambio de color al pasar el mouse */
         }
+
+        /* Estilo del menú desplegable */
+        .dropdown-menu {
+            border-radius: 5px; /* Bordes ligeramente redondeados para el menú */
+            padding: 5px 0; /* Espaciado interno */
+        }
+
+        .dropdown-item {
+            border-radius: 5px; /* Bordes ligeramente redondeados para las opciones del dropdown */
+            padding: 10px 20px; /* Espaciado interno */
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0; /* Color de fondo cuando pasas el mouse */
+        }
+
+
+        
+
+
 
     </style>
 </head>
@@ -187,15 +225,19 @@
             <div class="input-group" style="max-width: 400px; width: 25%;"> <!-- Agrupamos el input y el botón -->
                 <input type="text" id="searchInput" class="form-control" placeholder="Buscar..." style="border-radius: 30px; padding-left: 40px;"/>
                 <div class="input-group-append">
+                     <!-- Botón central -->
+                    <button class="btn btn-danger btn-sm" id="clearButton" style="border-radius: 30px; padding: 10px 20px; background-color: #d9534f; color: white; border: none;">
+                         <i class="fas fa-search" style="font-size: 16px;"></i> <!-- Ícono lupa -->
+                    </button>
                     <!-- Botón desplegable de búsqueda con solo el ícono de triángulo -->
-                    <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="searchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 30px; padding: 10px 20px; background-color: #2d8d00; color: white; border: none;">
+                    <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="searchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false";">
                         <i class="fas fa-caret-down" style="font-size: 16px;"></i> <!-- Triángulo -->
                     </button>
                     <div class="dropdown-menu" aria-labelledby="searchButton">
                         <a class="dropdown-item" href="#" id="searchByCedula"> Cédula</a>
                         <a class="dropdown-item" href="#" id="searchByName"> Nombre</a>
-                        <a class="dropdown-item" href="#" id="searchByName"> Apellidos</a>
-                        <a class="dropdown-item" href="#" id="searchByName"> Curso</a>
+                        <a class="dropdown-item" href="#" id="searchByApellido"> Apellidos</a>
+                        <a class="dropdown-item" href="#" id="searchByCurso"> Curso</a>
                     </div>
                 </div>
             </div>
@@ -262,9 +304,37 @@
                 ]
             });
 
+            // Variables para identificar el campo de búsqueda seleccionado
+            var searchColumn = null;
+
             // Evento de búsqueda personalizado
             $('#searchInput').on('keyup', function () {
-                table.search(this.value).draw(); // Filtra la tabla en tiempo real
+                if (searchColumn !== null) {
+                    table.column(searchColumn).search(this.value).draw(); // Filtra por columna seleccionada
+                } else {
+                    table.search(this.value).draw(); // Si no se ha seleccionado columna, busca en todo
+                }
+            });
+
+            // Evento al seleccionar un criterio de búsqueda en el menú desplegable
+            $('#searchByCedula').on('click', function () {
+                searchColumn = 0; // Índice de la columna CI
+                $('#searchInput').attr('placeholder', 'Buscar por cédula...');
+            });
+
+            $('#searchByName').on('click', function () {
+                searchColumn = 2; // Índice de la columna Nombres
+                $('#searchInput').attr('placeholder', 'Buscar por nombres...');
+            });
+
+            $('#searchByApellido').on('click', function () {
+                searchColumn = 1; // Índice de la columna Apellidos
+                $('#searchInput').attr('placeholder', 'Buscar por apellidos...');
+            });
+
+            $('#searchByCurso').on('click', function () {
+                searchColumn = 3; // Índice de la columna Curso
+                $('#searchInput').attr('placeholder', 'Buscar por curso...');
             });
 
             // Evento click en la fila
@@ -283,10 +353,21 @@
                 `;
                 $('#modalDetails').html(details);
                 $('#detailsModal').modal('show');
+            });
+
+            // Evento del botón "Limpiar"
+            $('.central-button').on('click', function () {
+                // Limpia el campo de búsqueda
+                $('#searchInput').val('');
                 
-                // Agregar la clase 'selected' para resaltar la fila
-                $('#myTable tbody tr').removeClass('selected');
-                $(this).addClass('selected');
+                // Restaura la búsqueda de la tabla a su estado inicial
+                table.search('').columns().search('').draw();
+                
+                // Restablece el placeholder del campo de búsqueda
+                $('#searchInput').attr('placeholder', 'Buscar...');
+                
+                // Resetea la columna de búsqueda seleccionada
+                searchColumn = null;
             });
         });
     </script>
