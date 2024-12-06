@@ -137,50 +137,177 @@
             background-color: #fa1313; /* Color de fondo del botón limpiar */                
             color: #333; /* Color del texto */
             border: 1px solid #ccc; /* Borde */
-            padding: 8px 5px; /* Espaciado interno del botón */
+            padding: 5px 0px; /* Espaciado interno del botón */
          }
 
         #searchInput {
             width: 150px; /* Tamaño de la barra de búsqueda */
             margin-right: 0px;
         }
+        
 
-                /* Estilo para los botones de despliegue */
+        /* Estilo del modal */
+        .modal-dialog {
+            background-color: #ffffff; /* Fondo blanco */
+            border: 2px solid #3498db; /* Borde azul */
+            border-radius: 8px; /* Bordes redondeados para un diseño más suave */
+        }
+        
+        .modal-header {
+            background-color: #2ecc71; /* Fondo verde */
+            color: #ffffff; /* Texto blanco */
+            border-bottom: 2px solid #3498db; /* Borde inferior azul */
+            padding: 15px;
+        }
+        
+        .modal-body {
+            background-color: #ffffff; /* Fondo blanco */
+            color: #333333; /* Texto oscuro */
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            background-color: #3498db; /* Fondo azul */
+            color: #ffffff; /* Texto blanco */
+            border-top: 2px solid #2ecc71; /* Borde superior verde */
+            padding: 10px;
+        }
+        
+            /* Estilo para el botón de despliegue */
         #searchButton {
-            border-radius: 30px; /* Bordes redondeados para el botón de despliegue */
-            padding: 10px 20px; /* Espaciado */
-            background-color: #8d6700; /* Fondo verde */
+            background-color: #2ecc71; /* Fondo verde */
             color: white; /* Texto blanco */
-            border: none; /* Sin borde */
+            border: 2px solid #3498db; /* Borde azul */
+            border-radius: 30px; /* Bordes redondeados */
+            padding: 4px 10px; /* Espaciado interno */
+            font-size: 16px; /* Tamaño de texto */
+            font-weight: bold; /* Texto en negrita */
+            transition: all 0.3s ease; /* Transición suave para los efectos hover */
         }
 
+        /* Efecto hover: cambia el fondo a azul claro */
         #searchButton:hover {
-            background-color: #248200; /* Cambio de color al pasar el mouse */
+            background-color: #3498db; /* Fondo azul */
+            border: 2px solid #2ecc71; /* Borde verde */
+            color: white; /* El texto se mantiene blanco */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto de profundidad */
         }
 
-        /* Estilo del menú desplegable */
-        .dropdown-menu {
-            border-radius: 5px; /* Bordes ligeramente redondeados para el menú */
-            padding: 5px 0; /* Espaciado interno */
-        }
+        /* Estilo para el ícono dentro del botón (lupita o triángulo) */
+        #searchButton i {
+    font-size: 18px; /* Tamaño del ícono */
+}
 
-        .dropdown-item {
-            border-radius: 5px; /* Bordes ligeramente redondeados para las opciones del dropdown */
-            padding: 10px 20px; /* Espaciado interno */
-        }
 
-        .dropdown-item:hover {
-            background-color: #f0f0f0; /* Color de fondo cuando pasas el mouse */
-        }
+       
+        /* Estilo para el menú desplegable */
+.dropdown-menu {
+    background-color: #2ecc71; /* Fondo verde del menú */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 0; /* Espaciado interno */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+    min-width: 160px; /* Ancho mínimo del menú */
+}
 
+/* Estilo del menú desplegable con efecto de deslizamiento */
+.dropdown-menu {
+    background-color: #2ecc71; /* Fondo verde del menú */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 0; /* Espaciado interno */
+    min-width: 160px; /* Ancho mínimo del menú */
+    display: none; /* Inicia oculto */
+    opacity: 0; /* Inicialmente invisible */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+    transform: translateY(-20px); /* Comienza ligeramente fuera de la vista */
+}
+
+/* Mostrar el menú con efecto de deslizamiento y desvanecimiento */
+.dropdown-menu.show {
+    display: block; /* Muestra el menú */
+    opacity: 1; /* Hace el menú visible */
+    transform: translateY(0); /* Mueve el menú a su posición original */
+}
+
+/* Efecto de rebote cuando el menú se despliega */
+.dropdown-menu.bounce {
+    animation: bounce 0.6s ease-in-out;
+}
+
+/* Definición del rebote */
+@keyframes bounce {
+    0% {
+        transform: translateY(-10px);
+    }
+    30% {
+        transform: translateY(5px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    70% {
+        transform: translateY(2px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Estilo de los ítems del menú */
+.dropdown-item {
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado de cada ítem */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Negrita para resaltar los ítems */
+    border-radius: 3px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave */
+}
+
+/* Efecto hover con expansión (scale) */
+.dropdown-item:hover {
+    background-color: #3498db; /* Fondo azul claro al pasar el ratón */
+    color: white; /* Texto blanco */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del ítem */
+}
+
+/* Efecto de desvanecimiento suave */
+.dropdown-item {
+    opacity: 0; /* Inicialmente invisible */
+    animation: fadeIn 0.4s forwards; /* Animación de desvanecimiento */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Estilo para el botón de desplegar el menú (si lo tienes) */
+#searchButton {
+    background-color: #3498db; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border-radius: 30px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de texto */
+    font-weight: bold; /* Texto en negrita */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para el botón */
+#searchButton:hover {
+    background-color: #2ecc71; /* Fondo verde */
+    color: white; /* Texto blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón */
+}
 
         
 
-
-
     </style>
-</head>
-<body>
+    </head>
+    <body>
     <!-- Barra superior -->
     <div class="barra-superior">
         <div>
@@ -221,27 +348,27 @@
         </div>
 
         <!-- Barra de búsqueda y botones -->
-        <div class="d-flex justify-content-end align-items-center mb-3">
-            <div class="input-group" style="max-width: 400px; width: 25%;"> <!-- Agrupamos el input y el botón -->
-                <input type="text" id="searchInput" class="form-control" placeholder="Buscar..." style="border-radius: 30px; padding-left: 40px;"/>
-                <div class="input-group-append">
-                     <!-- Botón central -->
-                    <button class="btn btn-danger btn-sm" id="clearButton" style="border-radius: 30px; padding: 10px 20px; background-color: #d9534f; color: white; border: none;">
-                         <i class="fas fa-search" style="font-size: 16px;"></i> <!-- Ícono lupa -->
-                    </button>
-                    <!-- Botón desplegable de búsqueda con solo el ícono de triángulo -->
-                    <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="searchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false";">
-                        <i class="fas fa-caret-down" style="font-size: 16px;"></i> <!-- Triángulo -->
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="searchButton">
-                        <a class="dropdown-item" href="#" id="searchByCedula"> Cédula</a>
-                        <a class="dropdown-item" href="#" id="searchByName"> Nombre</a>
-                        <a class="dropdown-item" href="#" id="searchByApellido"> Apellidos</a>
-                        <a class="dropdown-item" href="#" id="searchByCurso"> Curso</a>
-                    </div>
-                </div>
+<div class="d-flex justify-content-end align-items-center mb-3">
+    <div class="input-group" style="max-width: 400px; width: 25%;"> <!-- Agrupamos el input y el botón -->
+        <input type="text" id="searchInput" class="form-control" placeholder="Buscar..." style="border-radius: 30px; padding-left: 40px;"/>
+        <div class="input-group-append">
+            <!-- Botón de búsqueda (Lupa) -->
+            <button class="btn btn-danger btn-sm" id="clearButton" style="border-radius: 30px; padding: 10px 20px; background-color: #d9534f; color: white; border: none;">
+                <i class="fas fa-search" style="font-size: 16px;"></i> <!-- Ícono lupa -->
+            </button>
+            <!-- Botón desplegable de búsqueda con solo el ícono de triángulo -->
+            <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="searchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-caret-down" style="font-size: 16px;"></i> <!-- Triángulo -->
+            </button>
+            <div class="dropdown-menu" aria-labelledby="searchButton">
+                <a class="dropdown-item" href="#" id="searchByCedula">Cédula</a>
+                <a class="dropdown-item" href="#" id="searchByName">Nombre</a>
+                <a class="dropdown-item" href="#" id="searchByApellido">Apellidos</a>
+                <a class="dropdown-item" href="#" id="searchByCurso">Curso</a>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- Tabla con los resultados -->
         <table id="myTable" class="table table-striped table-bordered">
@@ -303,10 +430,10 @@
                     { targets: [0, 3], visible: false } // Oculta las columnas CI (0) y Curso (3)
                 ]
             });
-
+    
             // Variables para identificar el campo de búsqueda seleccionado
             var searchColumn = null;
-
+    
             // Evento de búsqueda personalizado
             $('#searchInput').on('keyup', function () {
                 if (searchColumn !== null) {
@@ -315,28 +442,28 @@
                     table.search(this.value).draw(); // Si no se ha seleccionado columna, busca en todo
                 }
             });
-
+    
             // Evento al seleccionar un criterio de búsqueda en el menú desplegable
             $('#searchByCedula').on('click', function () {
                 searchColumn = 0; // Índice de la columna CI
                 $('#searchInput').attr('placeholder', 'Buscar por cédula...');
             });
-
+    
             $('#searchByName').on('click', function () {
                 searchColumn = 2; // Índice de la columna Nombres
                 $('#searchInput').attr('placeholder', 'Buscar por nombres...');
             });
-
+    
             $('#searchByApellido').on('click', function () {
                 searchColumn = 1; // Índice de la columna Apellidos
                 $('#searchInput').attr('placeholder', 'Buscar por apellidos...');
             });
-
+    
             $('#searchByCurso').on('click', function () {
                 searchColumn = 3; // Índice de la columna Curso
                 $('#searchInput').attr('placeholder', 'Buscar por curso...');
             });
-
+    
             // Evento click en la fila
             $('#myTable tbody').on('click', 'tr', function () {
                 var rowData = table.row(this).data(); // Obtiene los datos de la fila clickeada
@@ -354,22 +481,41 @@
                 $('#modalDetails').html(details);
                 $('#detailsModal').modal('show');
             });
-
+    
             // Evento del botón "Limpiar"
             $('.central-button').on('click', function () {
                 // Limpia el campo de búsqueda
                 $('#searchInput').val('');
-                
+    
                 // Restaura la búsqueda de la tabla a su estado inicial
                 table.search('').columns().search('').draw();
-                
+    
                 // Restablece el placeholder del campo de búsqueda
                 $('#searchInput').attr('placeholder', 'Buscar...');
-                
+    
                 // Resetea la columna de búsqueda seleccionada
                 searchColumn = null;
             });
+    
+            // Evento del botón de lupita (limpiar y redirigir)
+            $('#clearButton').on('click', function () {
+                // Limpia el campo de búsqueda
+                $('#searchInput').val('');
+    
+                // Restaura la búsqueda de la tabla a su estado inicial
+                table.search('').columns().search('').draw();
+    
+                // Restablece el placeholder del campo de búsqueda
+                $('#searchInput').attr('placeholder', 'Buscar...');
+    
+                // Resetea la columna de búsqueda seleccionada
+                searchColumn = null;
+    
+                // Redirige a la página principal
+                window.location.href = '/'; // Cambia esta URL según la URL de tu página principal
+            });
         });
     </script>
+    
 </body>
 </html>
