@@ -150,7 +150,11 @@
             padding: 10px;
         }
         
-    
+        .paginate_button.page-item {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }   
 
         /* Efecto hover: cambia el fondo a azul claro */
         #searchButton:hover {
@@ -166,15 +170,12 @@ body {
 
 /* styler botones */
 #clearButton {
-    background-color: blue; /* Fondo rojo */
+    background-color: #337ab7; 
     color: white; /* Texto e ícono blancos */
     padding: 0px 10px; /* Espaciado interno (alrededor del ícono) */
-    font-size: 10px; /* Tamaño del texto */
-    border-radius: 0%; /* Forma circular */
+    font-size: 90px; /* Tamaño del texto */
     display: inline-flex; /* Para centrar el ícono dentro del botón */
     align-items: center; /* Centra el ícono verticalmente */
-    justify-content: center; /* Centra el ícono horizontalmente */
-    cursor: pointer; /* Cambia el cursor a puntero al pasar sobre el botón */
     transition: all 0.3s ease; /* Transición suave para los efectos */
 }
 
@@ -183,12 +184,10 @@ body {
 /* Estilo para el botón de desplegar el menú (si lo tienes) */
 #searchButton {
     background-color: #ffffff; /* Fondo blanco */
-    color: white; /* Texto blanco */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 6px 0px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño de texto */
+    color: black; /* Texto blanco */
+    padding: 6px 6px; /* Espaciado interno */
+    font-size: 14px; /* Tamaño de texto */
     font-weight: bold; /* Texto en negrita */
-    transition: all 0.3s ease; /* Transición suave */
       
 }
 
@@ -197,10 +196,6 @@ body {
     background-color: #ffffff; /* Fondo blanco del menú */
     padding: 5px 0; /* Espaciado interno */
     min-width: 160px; /* Ancho mínimo del menú */
-    display: none; /* Inicia oculto */
-    opacity: 0; /* Inicialmente invisible */
-    transition: all 0.3s ease-in-out; /* Transición suave */
-    transform: translateY(-20px); /* Comienza ligeramente fuera de la vista */
 }
 
 /* Mostrar el menú con efecto de deslizamiento y desvanecimiento */
@@ -208,13 +203,6 @@ body {
     display: block; /* Muestra el menú */
     opacity: 1; /* Hace el menú visible */
     transform: translateY(0); /* Mueve el menú a su posición original */
-}
-
-
-/* Efecto hover con expansión (scale) */
-.dropdown-item:hover {
-    background-color: #3498db; /* Fondo azul claro al pasar el ratón */
-    color: white; /* Texto blanco */
 }
 
 /* Efecto de desvanecimiento suave */
@@ -235,7 +223,10 @@ body {
         
 
     </style>
+    
     </head>
+
+
     <body>
     <!-- Barra superior -->
     <div class="barra-superior">
@@ -279,16 +270,17 @@ body {
         <!-- Barra de búsqueda y botones -->
 <div class="d-flex justify-content-end align-items-center mb-3">
     <div class="input-group" style="max-width: 400px; width: 25%;"> <!-- Agrupamos el input y el botón -->
-        <input type="text" id="searchInput" class="form-control" placeholder="Buscar...;"/>
+        <input type="text" id="searchInput" class="form-control" placeholder="Buscar..."/>
         <div class="input-group-append">
             <!-- Botón de búsqueda (Lupa) -->
             <button class="btn btn-danger btn-sm" id="clearButton">
-                <i class="fas fa-brush" style="font-size: 10px; color: 2d8d00;"></i>
+                <i class="fas fa-brush";"></i>
             </button>
             <!-- Botón desplegable de búsqueda con solo el ícono de triángulo -->
             <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="searchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-caret-down" style="font-size: 16px; color: black;"></i> <!-- Triángulo -->
+                 <i class="bi bi-archive-fill"></i> <!-- Triángulo -->
             </button>
+
             <div class="dropdown-menu" aria-labelledby="searchButton">
                 <a class="dropdown-item" href="#" id="searchByCedula">Cédula</a>
                 <a class="dropdown-item" href="#" id="searchByName">Nombre</a>
@@ -298,6 +290,7 @@ body {
         </div>
     </div>
 </div>
+
 
 
         <!-- Tabla con los resultados -->
@@ -348,92 +341,89 @@ body {
 
     
 
-    <script>
-        $(document).ready(function () {
-            var table = $('#myTable').DataTable({
-                language: {
-                    search: "Buscar:",
-                    lengthMenu: "Mostrar _MENU_ registros",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                    infoEmpty: "No se encontraron registros",
-                    infoFiltered: "(filtrado de _MAX_ registros totales)"
-                },
-                columnDefs: [
-                    { targets: [0, 3], visible: false } // Oculta las columnas CI (0) y Curso (3)
-                ]
-            });
-    
-            // Variables para identificar el campo de búsqueda seleccionado
-            var searchColumn = null;
-    
-            // Evento de búsqueda personalizado
-            $('#searchInput').on('keyup', function () {
-                if (searchColumn !== null) {
-                    table.column(searchColumn).search(this.value).draw(); // Filtra por columna seleccionada
-                } else {
-                    table.search(this.value).draw(); // Si no se ha seleccionado columna, busca en todo
-                }
-            });
-    
-            // Evento al seleccionar un criterio de búsqueda en el menú desplegable
-            $('#searchByCedula').on('click', function () {
-                searchColumn = 0; // Índice de la columna CI
-                $('#searchInput').attr('placeholder', 'Buscar por cédula...');
-            });
-    
-            $('#searchByName').on('click', function () {
-                searchColumn = 2; // Índice de la columna Nombres
-                $('#searchInput').attr('placeholder', 'Buscar por nombres...');
-            });
-    
-            $('#searchByApellido').on('click', function () {
-                searchColumn = 1; // Índice de la columna Apellidos
-                $('#searchInput').attr('placeholder', 'Buscar por apellidos...');
-            });
-    
-            $('#searchByCurso').on('click', function () {
-                searchColumn = 3; // Índice de la columna Curso
-                $('#searchInput').attr('placeholder', 'Buscar por curso...');
-            });
-    
-            // Evento click en la fila
-            $('#myTable tbody').on('click', 'tr', function () {
-                var rowData = table.row(this).data(); // Obtiene los datos de la fila clickeada
-                var details = `
-                    <p><strong>CI:</strong> ${rowData[0]}</p>
-                    <p><strong>Apellidos:</strong> ${rowData[1]}</p>
-                    <p><strong>Nombres:</strong> ${rowData[2]}</p>
-                    <p><strong>Curso:</strong> ${rowData[3]}</p>
-                    <p><strong>Horas Académicas:</strong> 20</p>
-                    <p><strong>Fecha Inicio:</strong> 05/11/2022</p>
-                    <p><strong>Fecha Fin:</strong> 05/13/2022</p>
-                    <p><strong>Cod Interno:</strong> AULA-AF-1501-2022</p>
-                    <p><strong>Aval:</strong> AULA MASTER</p>
-                `;
-                $('#modalDetails').html(details);
-                $('#detailsModal').modal('show');
-            });
-    
-           
-                // Restaura la búsqueda de la tabla a su estado inicial
-                table.search('').columns().search('').draw();
-
-    
-            // Evento del botón de lupita (limpiar y redirigir)
-            $('#clearButton').on('click', function () {
-                // Limpia el campo de búsqueda
-                $('#searchInput').val('');
-
-    
-    
-                // Resetea la columna de búsqueda seleccionada
-                searchColumn = null;
-
-                
-
-            });
+   <script>
+    $(document).ready(function () {
+        var table = $('#myTable').DataTable({
+            language: {
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                infoEmpty: "No se encontraron registros",
+                infoFiltered: "(filtrado de _MAX_ registros totales)"
+            },
+            columnDefs: [
+                { targets: [0, 3], visible: false } // Oculta las columnas CI (0) y Curso (3)
+            ]
         });
-    </script>
+
+        // Variables para identificar el campo de búsqueda seleccionado
+        var searchColumn = null;
+
+        // Evento de búsqueda personalizado
+        $('#searchInput').on('keyup', function () {
+            if (searchColumn !== null) {
+                table.column(searchColumn).search(this.value).draw(); // Filtra por columna seleccionada
+            } else {
+                table.search(this.value).draw(); // Si no se ha seleccionado columna, busca en todo
+            }
+        });
+
+        // Evento al seleccionar un criterio de búsqueda en el menú desplegable
+        $('#searchByCedula').on('click', function () {
+            searchColumn = 0; // Índice de la columna CI
+            $('#searchInput').attr('placeholder', 'Buscar por cédula...');
+        });
+
+        $('#searchByName').on('click', function () {
+            searchColumn = 2; // Índice de la columna Nombres
+            $('#searchInput').attr('placeholder', 'Buscar por nombres...');
+        });
+
+        $('#searchByApellido').on('click', function () {
+            searchColumn = 1; // Índice de la columna Apellidos
+            $('#searchInput').attr('placeholder', 'Buscar por apellidos...');
+        });
+
+        $('#searchByCurso').on('click', function () {
+            searchColumn = 3; // Índice de la columna Curso
+            $('#searchInput').attr('placeholder', 'Buscar por curso...');
+        });
+
+        // Evento click en la fila
+        $('#myTable tbody').on('click', 'tr', function () {
+            var rowData = table.row(this).data(); // Obtiene los datos de la fila clickeada
+            var details = `
+                <p><strong>CI:</strong> ${rowData[0]}</p>
+                <p><strong>Apellidos:</strong> ${rowData[1]}</p>
+                <p><strong>Nombres:</strong> ${rowData[2]}</p>
+                <p><strong>Curso:</strong> ${rowData[3]}</p>
+                <p><strong>Horas Académicas:</strong> 20</p>
+                <p><strong>Fecha Inicio:</strong> 05/11/2022</p>
+                <p><strong>Fecha Fin:</strong> 05/13/2022</p>
+                <p><strong>Cod Interno:</strong> AULA-AF-1501-2022</p>
+                <p><strong>Aval:</strong> AULA MASTER</p>
+            `;
+            $('#modalDetails').html(details);
+            $('#detailsModal').modal('show');
+        });
+
+        // Evento del botón de lupita (limpiar y redirigir)
+        $('#clearButton').on('click', function () {
+            // Limpia el campo de búsqueda
+            $('#searchInput').val('');
+
+            // Resetea la columna de búsqueda seleccionada
+            searchColumn = null;
+
+            // Restaura la búsqueda de la tabla a su estado inicial
+            table.search('').columns().search('').draw();
+
+            // Redirige a la página principal
+            window.location.href = "/";  // Cambia "/" por la URL de tu página principal
+        });
+    });
+</script>
+
     
 </body>
 </html>
