@@ -6,7 +6,7 @@ class Certificate(models.Model):
     national_id = models.CharField(max_length=50, null=True, blank=True)
     holder_first_name = models.CharField(max_length=100) 
     holder_last_name = models.CharField(max_length=100)
-    course = models.CharField(max_length=200)
+    course = models.CharField(max_length=20)
     hours = models.CharField(max_length=10) 
     start_date = models.DateField()
     end_date = models.DateField()
