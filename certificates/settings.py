@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'certificates.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lista',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',  # O la IP de tu servidor MySQL si no está en el mismo servidor
+        'PORT': '3306',  # Puerto predeterminado de MySQL
     }
 }
 

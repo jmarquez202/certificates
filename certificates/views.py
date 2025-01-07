@@ -1,9 +1,6 @@
 from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.db.models import Q
 from record.models import Certificate
-from users.models import CustomUser
 from django.contrib import messages
 
 def search_certificates(request):
@@ -31,3 +28,10 @@ def login_view(request):
             messages.error(request, 'Usuario o contraseña incorrectos.')
     
     return render(request, 'login.html')
+
+# Antes (puede causar error si 'id' no existe):
+#certificates = Certificate.objects.filter(id=some_id)
+
+# Después (usa un campo único existente como 'N' o 'CODIGO_INTERNO'):
+#certificates = Certificate.objects.filter(N=some_n)
+
