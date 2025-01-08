@@ -310,21 +310,22 @@
             </thead>
             <tbody>
                 {% for certificate in certificates %}
-                <tr data-id="{{ certificate.id }}">
-                    <td>{{ certificate.national_id }}</td>
-                    <td>{{ certificate.holder_last_name }}</td>
-                    <td>{{ certificate.holder_first_name }}</td>
-                    <td>{{ certificate.course }}</td>
-                    <td>{{ certificate.hours }}</td>
-                    <td>{{ certificate.start_date }}</td>
-                    <td>{{ certificate.end_date }}</td>
-                    <td>{{ certificate.certificate_code }}</td>
-                    <td>{{ certificate.institution }}</td>
+                <tr>
+                    <td>{{ certificate.CI }}</td>
+                    <td>{{ certificate.APELLIDOS }}</td>
+                    <td>{{ certificate.NONBRES }}</td>
+                    <td>{{ certificate.CURSO }}</td>
+                    <td>{{ certificate.HORAS_ACADEMICAS }}</td>
+                    <td>{{ certificate.FECHA_INICIO }}</td>
+                    <td>{{ certificate.FECHA_FIN }}</td>
+                    <td>{{ certificate.CODIGO_INTERNO }}</td>
+                    <td>{{ certificate.AVAL }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    
 
     <!-- Modal de detalles -->
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
