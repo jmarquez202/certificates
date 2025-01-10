@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'certificates.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lista',
+        'NAME': 'lista1',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',  # O la IP de tu servidor MySQL si no está en el mismo servidor

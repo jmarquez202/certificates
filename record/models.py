@@ -1,17 +1,17 @@
 from django.db import models
 
-# Create your models here.
 class Certificate(models.Model):
-    N = models.CharField(max_length=20, primary_key=True)
-    CI = models.CharField(max_length=50, null=True, blank=True)
-    NONBRES = models.CharField(max_length=100) 
-    APELLIDOS = models.CharField(max_length=100)
-    CURSO = models.CharField(max_length=20)
-    HORAS_ACADEMICAS = models.PositiveIntegerField()
-    FECHA_INICIO = models.DateField()
-    FECHA_FIN = models.DateField()
-    CODIGO_INTERNO = models.CharField(max_length=50, unique=True)
-    AVAL = models.CharField(max_length=200)
+    n = models.CharField(max_length=20, primary_key=True)  # Cambié el nombre para que siga las convenciones de Python
+    ci = models.CharField(max_length=50, null=True, blank=True)  # Cambié el nombre para seguir la convención
+    nombres = models.CharField(max_length=50)  # Cambié el nombre a minúsculas
+    apellidos = models.CharField(max_length=50)
+    curso = models.CharField(max_length=100)
+    horas_academicas = models.PositiveIntegerField()  # Usé guiones bajos para consistencia
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    codigo_interno = models.CharField(max_length=50, unique=True)
+    aval = models.CharField(max_length=200)
 
     def __str__(self):
-        return f"{self.certificate_number} - {self.holder_first_name} {self.holder_last_name}"
+        # Cambié a usar campos existentes
+        return f"{self.codigo_interno} - {self.nombres} {self.apellidos}"

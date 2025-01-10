@@ -2,32 +2,45 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from record.models import Certificate
 from django.contrib import messages
+from django.db.models import Q
+
+
+def data(request):
+    data = Certificate.objects.all()
+
+    return render(request, 'certificates/index.html', {'data': data})
 
 def search_certificates(request):
-    # Obtener todos los certificados sin filtrarlos
     certificates = Certificate.objects.all()
-
-    # Pasar todos los certificados a la plantilla
+    query = request.GET.get('q')  # Captura el término de búsqueda desde un input llamado 'q'
+    
+    if query:
+        # Filtrar certificados según la consulta de búsqueda
+        certificates = Certificate.objects.filter(
+            Q(NONBRES__icontains=query) |
+            Q(APELLIDOS__icontains=query) |
+            Q(CODIGO_INTERNO__icontains=query)
+        )
+    else:
+        # Si no hay búsqueda, devolver todos los certificados
+        certificates = Certificate.objects.all()
+    
     return render(request, 'certificates/index.html', {'certificates': certificates})
 
 def login_view(request):
     if request.method == 'POST':
-        # Obtener los datos del formulario
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        # Autenticar al usuario
-        user = authenticate(request, username=username, password=password) # type: ignore
-        
-        if user is not None:
-            # Iniciar sesión al usuario
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
             login(request, user)
-            return redirect('home')  # Redirigir a la página de inicio u otra página protegida
+            return redirect('home')  # Cambia 'home' por la vista protegida que desees
         else:
-            # Mostrar un mensaje de error si las credenciales son incorrectas
             messages.error(request, 'Usuario o contraseña incorrectos.')
-    
-    return render(request, 'login.html')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
+
 
 # Antes (puede causar error si 'id' no existe):
 #certificates = Certificate.objects.filter(id=some_id)

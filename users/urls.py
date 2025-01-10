@@ -4,5 +4,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('search_certificates/', views.search_certificates, name='search_certificates'),  # Ruta de búsqueda de certificados
+    path('search/', views.search_certificates, name='search_certificates'),
+    path('login/', views.login_view, name='login'),
 ]

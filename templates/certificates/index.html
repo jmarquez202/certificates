@@ -14,7 +14,6 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css" />
-    
 
     <!-- FontAwesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -29,7 +28,7 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         .barra-superior a {
@@ -96,7 +95,8 @@
             color: #3f51b5;
             font-weight: bold;
             text-align: left; /* Alineación al margen izquierdo */
-            margin-left: 0;  /* Sin margen a la izquierda */
+            margin-left: 0;
+            /* Sin margen a la izquierda */
         }
 
         #institution p {
@@ -110,7 +110,6 @@
             border: 3px solid #3f51b5;
             border-radius: 50%;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            
         }
 
         .btn-danger i {
@@ -121,22 +120,23 @@
         .dataTables_filter {
             display: none;
         }
+
         table.dataTable {
             border: 1px solid #dee2e6;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
-    
+
         table.dataTable thead {
             background-color: #3f51b5;
             color: white;
         }
-    
+
         table.dataTable thead th {
             text-align: center;
         }
-    
+
         table.dataTable tbody td {
             text-align: center;
             padding: 12px;
@@ -155,86 +155,87 @@
             padding: 15px;
         }
 
-    /* Botón de limpiar */
-    #clearButton {
-        background-color: #3f51b5;
-        color: white;
-        font-size: 14px;
-        border: none;
-        transition: all 0.3s ease;
-    }
+        /* Botón de limpiar */
+        #clearButton {
+            background-color: #3f51b5;
+            color: white;
+            font-size: 14px;
+            border: none;
+            transition: all 0.3s ease;
+        }
 
-    #clearButton:hover {
-        background-color: #283593;
-        transform: scale(1.05);
-    }
+        #clearButton:hover {
+            background-color: #283593;
+            transform: scale(1.05);
+        }
 
-    /* Botón de búsqueda desplegable */
-    #searchButton {
-        background-color: #ffffff;
-        color: #333;
-        border: 1px solid #ccc;
-        transition: all 0.3s ease;
-    }
+        /* Botón de búsqueda desplegable */
+        #searchButton {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+        }
 
-    #searchButton:hover {
-        background-color: #f1f1f1;
-        transform: scale(1.05);
-    }
+        #searchButton:hover {
+            background-color: #f1f1f1;
+            transform: scale(1.05);
+        }
 
-    /* Menú desplegable estilizado */
-    .dropdown-menu {
-        border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
+        /* Menú desplegable estilizado */
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
 
-    .dropdown-item {
-        padding: 10px 15px;
-        transition: background-color 0.2s ease, color 0.3s ease;
-    }
+        .dropdown-item {
+            padding: 10px 15px;
+            transition: background-color 0.2s ease, color 0.3s ease;
+        }
 
-    .dropdown-item:hover {
-        background-color: #3f51b5;
-        color: white;
-    }
+        .dropdown-item:hover {
+            background-color: #3f51b5;
+            color: white;
+        }
 
-    /* Modal estilizado */
-    .modal-content {
-        border-radius: 10px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
+        /* Modal estilizado */
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
 
-    .modal-header {
-        background-color: #3f51b5;
-        color: white;
-        border-bottom: none;
-        border-radius: 10px 10px 0 0;
-    }
+        .modal-header {
+            background-color: #3f51b5;
+            color: white;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+        }
 
-    .modal-body {
-        font-size: 1rem;
-        color: #333;
-    }
+        .modal-body {
+            font-size: 1rem;
+            color: #333;
+        }
 
-    .modal-footer {
-        background-color: #f4f7fb;
-        border-top: none;
-    }
-    /* Paginación de DataTables */
-    .dataTables_paginate .paginate_button {
-        background: #3f51b5;
-        color: white !important;
-        border: none;
-        margin: 2px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
+        .modal-footer {
+            background-color: #f4f7fb;
+            border-top: none;
+        }
 
-    .dataTables_paginate .paginate_button.current {
-        background: red;
-        font-weight: bold;
-    }
-     </style>
+        /* Paginación de DataTables */
+        .dataTables_paginate .paginate_button {
+            background: #3f51b5;
+            color: white !important;
+            border: none;
+            margin: 2px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .dataTables_paginate .paginate_button.current {
+            background: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -264,7 +265,6 @@
             <a href="#">Instituto</a>
             <a href="#">Repositorio</a>
         </div>
-        
         <div>
             <a href="#"><i class="fas fa-search"></i></a>
         </div>
@@ -282,50 +282,43 @@
         <div class="d-flex justify-content-end align-items-center mb-3">
             <div class="input-group" style="max-width: 400px; width: 25%;"> <!-- Agrupamos el input y el botón -->
                 <input type="text" id="searchInput" class="form-control" placeholder=" nombres, cedula, curso, y codigo" />
-                <div class="input-group-append">
-                         <div class="dropdown-menu" aria-labelledby="searchButton">
-                            <a class="dropdown-item" href="#" id="searchByCedula">Cédula</a>
-                            <a class="dropdown-item" href="#" id="searchByName">Nombre</a>
-                            <a class="dropdown-item" href="#" id="searchByApellido">Apellidos</a>
-                            <a class="dropdown-item" href="#" id="searchByCurso">Curso</a>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </div>
 
         <!-- Tabla con los resultados -->
         <table id="myTable" class="table table-striped table-bordered">
             <thead class="thead-white">
                 <tr>
+                    <td>N</td>
                     <th>CI</th>
                     <th>Apellidos</th>
                     <th>Nombres</th>
                     <th>Curso</th>
-                    <th>horas</th>
+                    <th>horas Academicas</th>
                     <th>Fecha inicio</th>
                     <th>fecha fin</th>
-                    <th>Codigo</th>
-                    <th>Institucion</th>
+                    <th>Codigo Interno</th>
+                    <th>Aval</th>
                 </tr>
             </thead>
             <tbody>
                 {% for certificate in certificates %}
-                <tr>
-                    <td>{{ certificate.CI }}</td>
-                    <td>{{ certificate.APELLIDOS }}</td>
-                    <td>{{ certificate.NONBRES }}</td>
-                    <td>{{ certificate.CURSO }}</td>
-                    <td>{{ certificate.HORAS_ACADEMICAS }}</td>
-                    <td>{{ certificate.FECHA_INICIO }}</td>
-                    <td>{{ certificate.FECHA_FIN }}</td>
-                    <td>{{ certificate.CODIGO_INTERNO }}</td>
-                    <td>{{ certificate.AVAL }}</td>
+                <tr data-id="{{ certificate.n }}">
+                    <td>{{ certificate.n }}</td>
+                    <td>{{ certificate.ci }}</td>
+                    <td>{{ certificate.apellidos }}</td>
+                    <td>{{ certificate.nombres }}</td>
+                    <td>{{ certificate.curso }}</td>
+                    <td>{{ certificate.horas_academicas }}</td>
+                    <td>{{ certificate.fecha_inicio }}</td>
+                    <td>{{ certificate.fecha_fin }}</td>
+                    <td>{{ certificate.codigo_interno }}</td>
+                    <td>{{ certificate.aval }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    
 
     <!-- Modal de detalles -->
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
@@ -345,7 +338,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
@@ -353,6 +346,18 @@
 
     <script>
         $(document).ready(function () {
+            // Eliminar las filas vacías antes de inicializar DataTables
+            $('#myTable tbody tr').each(function () {
+                var isEmpty = true;
+                $(this).find('td').each(function () {
+                    if ($(this).text().trim() !== '') {
+                        isEmpty = false;
+                    }
+                });
+                if (isEmpty) {
+                    $(this).remove();  // Eliminar fila si está vacía
+                }
+            });
             $('.dropdown-toggle').dropdown();
             var table = $('#myTable').DataTable({
                 language: {
@@ -362,9 +367,10 @@
                     infoEmpty: "No se encontraron registros",
                     infoFiltered: "(filtrado de _MAX_ registros totales)"
                 },
-                columnDefs: [
-                { targets: [0, 3, 4, 5, 6, 8], visible: false }
-                ]
+                columnDefs: [{
+                    targets: [0, 1, 5, 6, 7, 8, 9],
+                    visible: false
+                }]
             });
 
             var searchColumn = null;
@@ -400,16 +406,15 @@
             $('#myTable tbody').on('click', 'tr', function () {
                 var rowData = table.row(this).data();
                 var details = `
-                <p><strong>CI:</strong> ${rowData[0]}</p>
-                <p><strong>Apellidos:</strong> ${rowData[1]}</p>
-                <p><strong>Nombres:</strong> ${rowData[2]}</p>
-                <p><strong>Curso:</strong> ${rowData[3]}</p>
-                <p><strong>Horas Académicas:</strong> ${rowData[4]}</p>
-                <p><strong>Fecha Inicio:</strong> ${rowData[5]}</p>
-                <p><strong>Fecha Fin:</strong> ${rowData[6]}</p>
-                <p><strong>Cod Interno:</strong> ${rowData[7]}</p>
-                <p><strong>Aval:</strong> ${rowData[8]}</p>
-
+                <p><strong>CI:</strong> ${rowData[1]}</p>
+                <p><strong>Apellidos:</strong> ${rowData[2]}</p>
+                <p><strong>Nombres:</strong> ${rowData[3]}</p>
+                <p><strong>Curso:</strong> ${rowData[4]}</p>
+                <p><strong>Horas Académicas:</strong> ${rowData[5]}</p>
+                <p><strong>Fecha Inicio:</strong> ${rowData[6]}</p>
+                <p><strong>Fecha Fin:</strong> ${rowData[7]}</p>
+                <p><strong>Cod Interno:</strong> ${rowData[8]}</p>
+                <p><strong>Aval:</strong> ${rowData[9]}</p>
                 `;
                 $('#modalDetails').html(details);
                 $('#detailsModal').modal('show');
@@ -422,10 +427,7 @@
                 window.location.href = "/";
             });
         });
-        
     </script>
-
-
 </body>
 
 </html>
