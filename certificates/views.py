@@ -6,8 +6,8 @@ from django.db.models import Q
 
 
 def data(request):
-    data = Certificate.objects.all()
-
+    # Asegúrate de que solo se devuelvan registros únicos
+    data = Certificate.objects.all().distinct()
     return render(request, 'certificates/index.html', {'data': data})
 
 def search_certificates(request):
@@ -15,15 +15,13 @@ def search_certificates(request):
     query = request.GET.get('q')  # Captura el término de búsqueda desde un input llamado 'q'
     
     if query:
-        # Filtrar certificados según la consulta de búsqueda
         certificates = Certificate.objects.filter(
             Q(NONBRES__icontains=query) |
             Q(APELLIDOS__icontains=query) |
             Q(CODIGO_INTERNO__icontains=query)
-        )
+        ).distinct()  # Asegura que no haya registros duplicados
     else:
-        # Si no hay búsqueda, devolver todos los certificados
-        certificates = Certificate.objects.all()
+        certificates = Certificate.objects.all().distinct()  # Si no hay búsqueda, evitar duplicados
     
     return render(request, 'certificates/index.html', {'certificates': certificates})
 

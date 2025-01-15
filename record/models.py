@@ -5,7 +5,7 @@ class Certificate(models.Model):
     ci = models.CharField(max_length=50, null=True, blank=True)  # Cambié el nombre para seguir la convención
     nombres = models.CharField(max_length=50)  # Cambié el nombre a minúsculas
     apellidos = models.CharField(max_length=50)
-    curso = models.CharField(max_length=100)
+    curso = models.CharField(max_length=200)
     horas_academicas = models.PositiveIntegerField()  # Usé guiones bajos para consistencia
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()

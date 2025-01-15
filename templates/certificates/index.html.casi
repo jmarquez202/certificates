@@ -288,8 +288,23 @@
 
     <script>
         $(document).ready(function () {
-            // Inicializamos DataTable
-            var table = $('#myTable').DataTable({
+            // Inicializamos DataTable con AJAX
+            $('#myTable').DataTable({
+                ajax: {
+                    url: '/get-certificates/',  // URL para obtener los datos
+                    dataSrc: '' // Especificamos que los datos están en el primer nivel de la respuesta
+                },
+                columns: [
+                    { data: 'ci' },
+                    { data: 'apellidos' },
+                    { data: 'nombres' },
+                    { data: 'curso' },
+                    { data: 'horas_academicas' },
+                    { data: 'fecha_inicio' },
+                    { data: 'fecha_fin' },
+                    { data: 'codigo_interno' },
+                    { data: 'aval' }
+                ],
                 language: {
                     search: "Buscar:",
                     lengthMenu: "Mostrar _MENU_ registros",
@@ -298,45 +313,34 @@
                     infoFiltered: "(filtrado de _MAX_ registros totales)"
                 },
                 columnDefs: [
-                    { targets: [0, 1, 5, 6, 7, 8, 9], visible: false } // Oculta columnas innecesarias
+                    { targets: [0, 1, 5, 6, 7, 8, 9], visible: false } // Oculta las columnas CI, Horas, etc.
                 ]
             });
-
-            // Filtro global
+    
+            // Buscador de tabla
             $('#searchInput').on('keyup', function () {
-                table.search(this.value).draw();
+                $('#myTable').DataTable().search(this.value).draw();
             });
-
-            // Filtro por columna
-            $('#searchByCedula').on('click', function () {
-                table.column(1).search($('#searchInput').val()).draw(); // Filtro por cédula
-            });
-            $('#searchByApellido').on('click', function () {
-                table.column(2).search($('#searchInput').val()).draw(); // Filtro por apellidos
-            });
-            $('#searchByCurso').on('click', function () {
-                table.column(4).search($('#searchInput').val()).draw(); // Filtro por curso
-            });
-
-            // Mostrar detalles en el modal
+    
+            // Función para mostrar detalles en el modal
             $('#myTable tbody').on('click', 'tr', function () {
+                var table = $('#myTable').DataTable();
                 var rowData = table.row(this).data();
                 var details = `
-                    <p><strong>CI:</strong> ${rowData[1]}</p>
-                    <p><strong>Apellidos:</strong> ${rowData[2]}</p>
-                    <p><strong>Nombres:</strong> ${rowData[3]}</p>
-                    <p><strong>Curso:</strong> ${rowData[4]}</p>
-                    <p><strong>Horas Académicas:</strong> ${rowData[5]}</p>
-                    <p><strong>Fecha Inicio:</strong> ${rowData[6]}</p>
-                    <p><strong>Fecha Fin:</strong> ${rowData[7]}</p>
-                    <p><strong>Cod Interno:</strong> ${rowData[8]}</p>
-                    <p><strong>Aval:</strong> ${rowData[9]}</p>
+                    <p><strong>CI:</strong> ${rowData.ci}</p>
+                    <p><strong>Apellidos:</strong> ${rowData.apellidos}</p>
+                    <p><strong>Nombres:</strong> ${rowData.nombres}</p>
+                    <p><strong>Curso:</strong> ${rowData.curso}</p>
+                    <p><strong>Horas Académicas:</strong> ${rowData.horas_academicas}</p>
+                    <p><strong>Fecha Inicio:</strong> ${rowData.fecha_inicio}</p>
+                    <p><strong>Fecha Fin:</strong> ${rowData.fecha_fin}</p>
+                    <p><strong>Cod Interno:</strong> ${rowData.codigo_interno}</p>
+                    <p><strong>Aval:</strong> ${rowData.aval}</p>
                 `;
                 $('#modalDetails').html(details);
                 $('#detailsModal').modal('show');
             });
         });
     </script>
-</body>
-
-</html>
+    
+    
