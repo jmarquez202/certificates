@@ -17,167 +17,9 @@
 
     <!-- FontAwesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 
-    <style>
-        /* Estilo para la barra superior */
-        .barra-superior {
-            background: linear-gradient(90deg, #050096, #283593); /* Gradiente de azul */
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .barra-superior a {
-            color: white;
-            margin-left: 15px;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .barra-superior a:hover {
-            color: #f8e71c; /* Amarillo claro */
-            text-decoration: underline;
-        }
-
-        .barra-inferior {
-            background-color: #678ccf; /* Azul intermedio */
-            padding: 8px 15px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .barra-inferior img {
-            max-height: 40px; /* Tamaño máximo del logotipo */
-        }
-
-        .barra-inferior .menu {
-            margin-left: auto;
-            display: flex;
-            gap: 30px; /* Espaciado entre las opciones del menú */
-        }
-
-        .barra-inferior .menu a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
-
-        .barra-inferior .menu a:hover {
-            color: #f8e71c;
-            text-decoration: underline;
-        }
-
-        /* Estilo de la página */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
-            margin: 0;
-            color: #333;
-        }
-
-        /* Cambiar el color de la columna cuando pasas el mouse */
-        #myTable tbody td:hover {
-            background-color: #cce5ff;
-        }
-
-        #institution {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        #institution h1 {
-            color: #3f51b5;
-            font-weight: bold;
-            text-align: left; /* Alineación al margen izquierdo */
-            margin-left: 0;
-            /* Sin margen a la izquierda */
-        }
-
-        #institution p {
-            color: #67768e;
-            font-size: 1.1rem;
-        }
-
-        #institution img {
-            max-width: 200px;
-            margin-bottom: 15px;
-            border: 3px solid #3f51b5;
-            border-radius: 50%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-danger i {
-            font-size: 16px;
-        }
-
-        /* Ocultar el cuadro de búsqueda interno de DataTables */
-        .dataTables_filter {
-            display: none;
-        }
-
-        table.dataTable {
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            margin: 0;
-        }
-
-        table.dataTable thead {
-            background-color: #3f51b5;
-            color: white;
-        }
-
-        table.dataTable thead th {
-            text-align: center;
-        }
-
-        table.dataTable tbody td {
-            text-align: center;
-            padding: 12px;
-        }
-
-        /* Estilo del modal */
-        .modal-dialog {
-            background-color: #ffffff;
-            border: 2px solid #3498db;
-            border-radius: 8px;
-        }
-
-        .dropdown-item {
-            padding: 10px 15px;
-            transition: background-color 0.2s ease, color 0.3s ease;
-        }
-
-        /* Modal estilizado */
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-header {
-            background-color: #3f51b5;
-            color: white;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .modal-body {
-            font-size: 1rem;
-            color: #333;
-        }
-
-        .modal-footer {
-            background-color: #f4f7fb;
-            border-top: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -196,28 +38,11 @@
         </div>
     </div>
 
-    <!-- Barra inferior -->
-    <div class="barra-inferior">
-        <div>
-            <img id="logo" src="{% static 'logo_2024.png' %}" alt="logo_2024">
-        </div>
-        <div class="menu">
-            <a href="#">Inicio</a>
-            <a href="#">Oferta Académica</a>
-            <a href="#">Instituto</a>
-            <a href="#">Repositorio</a>
-        </div>
-        <div>
-            <a href="#"><i class="fas fa-search"></i></a>
-        </div>
-    </div>
-
-    <!-- Contenido principal -->
     <div class="container mt-5">
         <div id="institution">
-            <img src="{% static 'logo_2024.png' %}" alt="logo_2024">
-            <h1 class="display-4">Certificados</h1>
-            <p>Valida <strong>curso o capacitación</strong> en el siguiente apartado (Busca por nombres, apellidos, número de cédula, nombre del curso o por código de verificación).</p>
+            <img src="{% static 'logo_2024.png' %}" alt="Logo ISTLA">
+            <!-- <h3 class="display-4">Certificados</h3> -->
+            <p>Valida tu <strong>Certificado</strong>  ingrese sus nombres, apellidos, número de cédula o código de verificación.</p>
         </div>
 
         <!-- Barra de búsqueda y botones -->

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
+#    'users',
     'record',
 ]
 
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'certificates.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lista1',
+        'NAME': 'lista',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'admin2023',
         'HOST': 'localhost',  # O la IP de tu servidor MySQL si no está en el mismo servidor
-        'PORT': '3306',  # Puerto predeterminado de MySQL
+        'PORT': '3307',  # Puerto predeterminado de MySQL
     }
 }
 
@@ -106,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
 
 
 

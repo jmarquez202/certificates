@@ -6,8 +6,7 @@ from django.db.models import Q
 
 
 def data(request):
-    # Asegúrate de que solo se devuelvan registros únicos
-    data = Certificate.objects.all().distinct()
+    data = Certificate.objects.all()
     return render(request, 'certificates/index.html', {'data': data})
 
 def search_certificates(request):
@@ -24,25 +23,4 @@ def search_certificates(request):
         certificates = Certificate.objects.all().distinct()  # Si no hay búsqueda, evitar duplicados
     
     return render(request, 'certificates/index.html', {'certificates': certificates})
-
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')  # Cambia 'home' por la vista protegida que desees
-        else:
-            messages.error(request, 'Usuario o contraseña incorrectos.')
-    else:
-        form = AuthenticationForm()
-
-    return render(request, 'login.html', {'form': form})
-
-
-# Antes (puede causar error si 'id' no existe):
-#certificates = Certificate.objects.filter(id=some_id)
-
-# Después (usa un campo único existente como 'N' o 'CODIGO_INTERNO'):
-#certificates = Certificate.objects.filter(N=some_n)
 
