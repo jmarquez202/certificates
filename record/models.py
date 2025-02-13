@@ -6,10 +6,10 @@ class Certificate(models.Model):
     nombres = models.CharField(max_length=50)  # Cambié el nombre a minúsculas
     apellidos = models.CharField(max_length=50)
     curso = models.CharField(max_length=200)
-    horas_academicas = models.PositiveIntegerField()  # Usé guiones bajos para consistencia
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
-    codigo_interno = models.CharField(max_length=50, unique=True)
+    horas_academicas = models.IntegerField()  # Usé guiones bajos para consistencia
+    fecha_inicio = models.CharField(max_length=20)  # Puedes ajustar el max_length según sea necesario
+    fecha_fin = models.CharField(max_length=255)  # Aumenta el max_length según sea necesario
+    codigo_interno = models.CharField(max_length=50)
     aval = models.CharField(max_length=200)
 
     def __str__(self):
