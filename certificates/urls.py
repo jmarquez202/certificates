@@ -17,10 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from django.urls import path
-from . import views
+from .views import search_certificates, generate_pdf_view, data  # Importar las vistas necesarias
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.search_certificates, name='search_certificates'),
+    path('', search_certificates, name='search_certificates'),  # Página de búsqueda de certificados
+    path('generar-pdf/', generate_pdf_view, name='generar_pdf'),  # Ruta para generar PDF
+    path('data/', data, name='data'),  # Ruta para mostrar todos los certificados
 ]

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificado</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .certificate { border: 5px solid black; padding: 20px; margin: 50px; }
+        .print-button { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    {% for certificate in certificates %}
+    <div class="certificate">
+        <h1>Certificado</h1>
+        <p>Este certificado es otorgado a:</p>
+        <h2>{{ certificate.nombres }} {{ certificate.apellidos }}</h2>
+        <p>Por haber completado el curso: <strong>{{ certificate.curso }}</strong></p>
+        <p>Horas académicas: {{ certificate.horas_academicas }}</p>
+        <p>Fecha de emisión: {{ certificate.fecha_fin }}</p>
+        <p>Código interno: {{ certificate.codigo_interno }}</p>
+    </div>
+    {% endfor %}
+    <button class="print-button" onclick="window.print()">Imprimir</button>
+</body>
+</html>

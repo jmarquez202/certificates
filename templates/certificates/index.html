@@ -40,7 +40,7 @@
 
     <div class="container mt-5">
         <div id="institution">
-            <img src="{% static 'logo_2024.png' %}" alt="Logo ISTLA">
+            <img src="{% static 'certificado.png' %}" alt="Logo ISTLA">
             <!-- <h3 class="display-4">Certificados</h3> -->
             <p>Valida tu <strong>Certificado</strong>  ingrese sus nombres, apellidos, número de cédula o código de verificación.</p>
         </div>
@@ -69,7 +69,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for certificate in certificates %}
+                {% for certificate in data %}
                 <tr data-id="{{ certificate.n }}">
                     <td>{{ certificate.n }}</td>
                     <td>{{ certificate.ci }}</td>
